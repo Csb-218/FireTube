@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+/* App Css */
+
+.selected_tab{
+  @apply basis-0 grow py-3 px-4 inline-flex justify-center items-start gap-2 bg-red-600 text-sm font-medium text-center text-white rounded-lg
+}
+.unselected_tab{
+  @apply basis-0 grow py-3 px-4 inline-flex justify-center items-center gap-2 bg-transparent text-sm font-medium text-center text-black rounded-lg
+}
