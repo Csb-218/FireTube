@@ -1,8 +1,9 @@
 import { useContext ,useEffect} from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { FeedContext } from './Feed'
+import { FeedContext } from '../../pages/_app'
 import VideoCard from '../cards/VideoCard'
 import {videosByCategory} from "../../API/Api"
+import CardSkeleton from '../skeletons/CardSkeleton'
 
 
 
@@ -31,20 +32,26 @@ const FeedContent = () => {
   return (
     <>
     {console.log(isLoading,isPending, isError,data)}
-      <div>FeedContent</div>
       <p>
         {select}
       </p>
-      <div class="max-w-[94rem] px-4 py-10 sm:px-6 lg:px-2 lg:py-14 mx-auto ">
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="max-w-[94rem] px-4 py-10 sm:px-6 lg:px-2 lg:py-14 mx-auto ">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {
             isLoading?   
-            <p>Loading ...</p>
+            sidebar_items.map(item =>
+             <>
+             <CardSkeleton key={item.id}/>
+             <CardSkeleton key={item.id}/>
+             </>)
+            // <p>Loading</p>
             :
             data && data.map(item => {
               // console.log(item)
               return (
-                <VideoCard key={sidebar_items.indexOf(item)}
+                <VideoCard 
+                  key={item.id}
+                  videoId={item.id}
                   videoData={item}
                   thumbnail={item.snippet.thumbnails.high.url}
                   title={item.snippet.title}
