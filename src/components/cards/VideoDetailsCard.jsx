@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
-import { videoById, channelById, suggestedVideosById } from '@/API/Api'
+import { videoById, channelById } from '@/API/Api'
 import { useQuery,useQueries } from '@tanstack/react-query'
 import Months from '@/utils/Months';
-import SuggestedVideoCard from './SuggestedVideoCard';
+import YouTube from "react-youtube"; 
+
 
 const VideoDetailsCard = ({ videoID }) => {
 
@@ -37,6 +38,13 @@ const VideoDetailsCard = ({ videoID }) => {
 
         return `${month} ${day}, ${year} `
     }
+    const opts = { 
+        height: "590", 
+        width: "1170", 
+        playerVars: { 
+          autoplay: 1, 
+        }, 
+      }; 
 
     return (
         <>
@@ -44,11 +52,19 @@ const VideoDetailsCard = ({ videoID }) => {
             {/* video section */}
             <div className="h-full w-full flex flex-col gap-y-2 ">
                 {/* video player */}
-                <iframe
+                {/* <iframe
                     id="player"
                     src={`http://www.youtube.com/embed/${videoID}?autoplay=1`}
                     className='w-full h-3/4 rounded-xl'
-                />
+                /> */}
+                <div className='w-full h-full rounded-xl'>
+                 <YouTube 
+                 videoId="sTnm5jvjgjM"
+                 opts={opts}
+                 />
+                </div>
+                
+
                 <div className="w-full h-auto px-4 text-3xl">
                     <p>{videoResults?.snippet.title}</p>
                 </div>
