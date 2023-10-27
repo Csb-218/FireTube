@@ -47,6 +47,7 @@ const video = () => {
                   title={title}
                   channel={channel}
                   id={id}
+                  key={id}
                 />
               )
             })

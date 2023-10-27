@@ -39,7 +39,7 @@ const VideoDetailsCard = ({ videoID }) => {
         return `${month} ${day}, ${year} `
     }
     const opts = { 
-        height: "590", 
+        height: "585", 
         width: "1170", 
         playerVars: { 
           autoplay: 1, 
@@ -57,7 +57,7 @@ const VideoDetailsCard = ({ videoID }) => {
                     src={`http://www.youtube.com/embed/${videoID}?autoplay=1`}
                     className='w-full h-3/4 rounded-xl'
                 /> */}
-                <div className='w-full h-3/4   rounded-xl'>
+                <div className='w-full h-3/4  rounded-xl'>
                  <YouTube 
                  videoId={`${videoID}`}
                  opts={opts}
