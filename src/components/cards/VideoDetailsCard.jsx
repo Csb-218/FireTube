@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation';
 import { videoById, channelById } from '@/API/Api'
 import { useQuery,useQueries } from '@tanstack/react-query'
 import Months from '@/utils/Months';
@@ -6,7 +7,7 @@ import YouTube from "react-youtube";
 
 
 const VideoDetailsCard = ({ videoID }) => {
-
+    const router = useRouter()
 
     const queryResults = useQueries({
         queries:[
@@ -15,8 +16,8 @@ const VideoDetailsCard = ({ videoID }) => {
             queryFn: () => videoById(videoID),
             enabled: !!videoID
             }
-    ]
-})
+        ]
+    })
     let videoResults = queryResults?.[0].data
     // let suggestedVideos = queryResults?.[1].data
     let channelId = videoResults?.snippet?.channelId
@@ -70,7 +71,7 @@ const VideoDetailsCard = ({ videoID }) => {
                 </div>
                 {/* channel details */}
                 <div className='w-full h-auto p-4 rounded-xl '>
-                    <div className='flex gap-x-10 items-center'>
+                    <div className='flex gap-x-10 items-center cursor-pointer' onClick={()=> router.push(`/channel/${channelId}`)}>
                         <img
                             src={`${channelResults?.snippet.thumbnails.high.url}`}
                             className="w-12 h-12 rounded-full border-2"

@@ -16,18 +16,6 @@ const FeedContent = () => {
     queryFn:()=>videosByCategory(select) ,
     enabled: !!select
   })
- 
-
-  // const getVideos = async() =>{
-  //   videosByCategory(20)
-  //   .then(res => console.log(res))
-  //   .catch(err => console.error(err))
-  // }
-
-  // useEffect(()=>{
-  //   getVideos()
-  //   console.log(process.env.NEXT_PUBLIC_API_KEY)
-  // },[])
 
   return (
     <>

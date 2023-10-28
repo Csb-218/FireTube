@@ -5,7 +5,7 @@ export  async function videosByCategory(videoCategoryId){
     const params ={
       part : 'snippet',
       chart : 'mostPopular',
-      regionCode : 'US',
+      regionCode : 'IN',
       videoCategoryId : videoCategoryId,
       key : process.env.NEXT_PUBLIC_API_KEY,
       maxResults : 30
@@ -40,7 +40,7 @@ export async function videoById(videoId){
 
 export async function channelById(channelId){
   const params={
-    part:`snippet,contentDetails,statistics`,
+    part:`snippet,contentDetails,statistics,brandingSettings`,
     id: channelId,
     key:process.env.NEXT_PUBLIC_API_KEY
   }
@@ -78,4 +78,64 @@ export async function suggestedVideosById(id){
   } catch (error) {
     console.error(error);
   }
+}
+
+export async function videosByChannel(channelId){
+
+const options = {
+  method: 'GET',
+  url: 'https://youtube-v31.p.rapidapi.com/search',
+  params: {
+    channelId: channelId,
+    part: 'snippet,id',
+    order: 'date',
+    maxResults: '50'
+  },
+  headers: {
+    'X-RapidAPI-Key': 'b485fad166msh87e98db6a5ea489p17ef29jsncfc6a57f3847',
+    'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com'
+  }
+};
+
+try {
+	const response = await axios.request(options);
+	console.log(response.data.items);
+  return response.data.items
+} catch (error) {
+	console.error(error);
+}
+}
+
+export async function playlistItems(playlistId){
+  const params={
+    part:`snippet,contentDetails,id`,
+    id: playlistId,
+    key:process.env.NEXT_PUBLIC_API_KEY
+  }
+  try{
+    const playlistItems = await axios.get(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/playlistItems`,{params})
+    console.log(playlistItems.data.items)
+    return playlistItems?.data?.items
+  }
+  catch(err){
+    console.error(err)
+  }
+}
+
+export async function channelPlaylists(channelId){
+  console.log(channelId)
+  const params={
+    part:`snippet,id,contentDetails`,
+    channelId: channelId,
+    key:process.env.NEXT_PUBLIC_API_KEY
+  }
+  try{
+     const playlists = await axios.get(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/playlists`,{params})
+     console.log(playlists.data.items)
+     return playlists?.data?.items
+  }
+  catch(err){
+    console.error(err)
+  }
+
 }
