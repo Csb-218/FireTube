@@ -13,10 +13,13 @@ function Navbar() {
 
     return (
         <>
-            <header className="flex flex-wrap  sm:flex-nowrap w-screen z-50 text-sm py-4 dark:bg-gray-800">
-                <OffCanvas />
-                <nav className=" w-screen mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
-                    <div className="flex items-center justify-between w-full">
+            <header className="flex flex-wrap w-[500px] lg:w-full sm:flex-nowrap  z-50 text-sm py-4 dark:bg-gray-800">
+                <div className="lg:block hidden">
+                   <OffCanvas />
+                </div>
+               
+                <nav className=" w-full  mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
+                    <div className="flex items-center lg:justify-start justify-between w-full">
                         <a className="inline-flex items-center gap-x-2 text-xl font-semibold dark:text-white" href="#">
                             <div className="bg-transparent">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="red" className="bi bi-youtube" viewBox="0 0 16 16">
