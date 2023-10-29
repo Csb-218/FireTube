@@ -29,11 +29,11 @@ const video = () => {
     <>
       <Navbar />
 
-      <div className='p-4 h-screen flex gap-x-2 '>
-        <div className="w-3/4">
+      <div className='p-4 lg:h-screen h-auto flex flex-col lg:flex-row lg:gap-x-2   '>
+        <div className="lg:w-3/4 md:w-full sm:w-full ">
           <VideoDetailsCard videoID={id} />
         </div>
-        <div className="w-1/4 h-full overflow-scroll">
+        <div className="lg:w-1/4 md:w-full sm:w-full h-full overflow-scroll p-1 ">
           {
             suggestedVideos?.map(video => {
               console.log(video)

@@ -25,7 +25,7 @@ const Channel_tabs = ({ channelVideos,channelPlaylists,channelDetails}) => {
 
                         <div className="max-w-[105rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
 
-                            <div className="grid grid-cols-2  sm:grid-cols-4 md:grid-cols-5 gap-3 lg:gap-6">
+                            <div className="grid grid-cols-2  sm:grid-cols-4 md:grid-cols-5 gap-3 lg:gap-6 ">
                                 {
                                     channelVideos?.map(video =>
                                         <VideoCard

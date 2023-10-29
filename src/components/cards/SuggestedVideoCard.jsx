@@ -15,18 +15,19 @@ const SuggestedVideoCard = ({thumbnail,title,channel,id}) => {
 
   return (
     <Link href={`/video/${id}`}>
-        <div className=" h-1/6 flex gap-x-1">
-        <div className="w-1/2 ">
+        <div className=" lg:h-1/6   flex gap-x-1 my-1 rounded-xl overflow-clip hover:shadow-sm border-2 hover:shadow-gray-500 transition-transform ">
+        <div className="w-1/2  bg-orange-500 ">
           <img 
           src={`${thumbnail}`}
-          clasName="object-fill"
+          className="w-full h-full object-cover"
           />
           
         </div>
-        <div className="w-1/2 space-y-2 py-4 ">
-           <p>{title.length > 38 ? `${title.slice(0,38)}...` : title}</p>
-           <p className='text-xs '>{channel}</p>
-           <p className="text-xs ">{views} views</p>
+        <div className="w-1/2 grid grid-cols-1 gap-y-1 content-center   ">
+           {/* <p>{title.length > 58 ? `${title.slice(0,58)}...` : title}</p> */}
+           <p className=" sm:h-full  overflow-hidden text-ellipsis">{title}</p>
+           <p className='lg:text-xs text-lg  '>{channel}</p>
+           <p className="lg:text-xs ">{views} views</p>
         </div>
     </div>
     </Link>

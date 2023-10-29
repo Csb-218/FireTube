@@ -53,22 +53,23 @@ const VideoDetailsCard = ({ videoID }) => {
             {/* video section */}
             <div className="h-full w-full flex flex-col gap-y-2 ">
                 {/* video player */}
-                {/* <iframe
+                <iframe
                     id="player"
                     src={`http://www.youtube.com/embed/${videoID}?autoplay=1`}
-                    className='w-full h-3/4 rounded-xl'
-                /> */}
-                <div className='w-full h-3/4  rounded-xl'>
+                    className='w-full lg:h-3/4 h-80 rounded-xl'
+                />
+                {/* <div className='w-full h-3/4  rounded-xl'>
                  <YouTube 
                  videoId={`${videoID}`}
                  opts={opts}
+                className={'w-full'}
                  />
-                </div>
+                </div> */}
                 
-
                 <div className="w-full h-auto px-4 text-3xl">
                     <p>{videoResults?.snippet.title}</p>
                 </div>
+                
                 {/* channel details */}
                 <div className='w-full h-auto p-4 rounded-xl '>
                     <div className='flex gap-x-10 items-center cursor-pointer' onClick={()=> router.push(`/channel/${channelId}`)}>
@@ -84,7 +85,7 @@ const VideoDetailsCard = ({ videoID }) => {
                     </div>
                 </div>
                 {/* video description */}
-                <div className='w-full h-1/5 overflow-scroll rounded-xl bg-neutral-700 p-4'>
+                <div className='w-full lg:h-1/5 h-60 overflow-scroll rounded-xl bg-neutral-700 p-4'>
                     <p>{videoResults?.statistics.viewCount} views premiered on {premieredDate(videoResults?.snippet.publishedAt)}</p>
                     <p>{videoResults?.snippet.description}</p>
                 </div>
