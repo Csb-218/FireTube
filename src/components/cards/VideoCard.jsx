@@ -7,7 +7,7 @@ const VideoCard = ({videoData,videoId,thumbnail,title,description,channelTitle})
     return (
         <Link href={`/video/${videoId}`}>
         <div className="group flex flex-col h-full  shadow-sm rounded-xl  ">
-            <div className="h-52 flex flex-col justify-center items-center  rounded-xl overflow-clip">
+            <div className="lg:h-52 h-full flex flex-col justify-center items-center  rounded-xl overflow-clip">
                 
                 <img className="object-cover" src={thumbnail}/>
             </div>

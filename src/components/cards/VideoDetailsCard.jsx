@@ -40,8 +40,8 @@ const VideoDetailsCard = ({ videoID }) => {
         return `${month} ${day}, ${year} `
     }
     const opts = { 
-        height: "585", 
-        width: "1170", 
+        height: "700", 
+        width: "1175", 
         playerVars: { 
           autoplay: 1, 
         }, 
@@ -51,20 +51,21 @@ const VideoDetailsCard = ({ videoID }) => {
         <>
         
             {/* video section */}
-            <div className="h-full w-full flex flex-col gap-y-2 ">
+            <div className="h-full w-full flex flex-col gap-y-2  ">
                 {/* video player */}
                 <iframe
-                    id="player"
-                    src={`http://www.youtube.com/embed/${videoID}?autoplay=1`}
-                    className='w-full lg:h-3/4 h-80 rounded-xl'
+                    id="ytplayer"
+                    src={`http://www.youtube.com/embed/${videoID}?autoplay=1&enablejsapi=1`}
+                    className='w-full lg:h-3/4 h-[300px] rounded-xl'
                 />
-                {/* <div className='w-full h-3/4  rounded-xl'>
-                 <YouTube 
+
+                 {/* className={'w-0'} */}
+                {/* <div className='w-full h-3/4  rounded-xl'> */}
+                 {/* <YouTube 
                  videoId={`${videoID}`}
                  opts={opts}
-                className={'w-full'}
-                 />
-                </div> */}
+                 /> */}
+                {/* </div> */}
                 
                 <div className="w-full h-auto px-4 text-3xl">
                     <p>{videoResults?.snippet.title}</p>

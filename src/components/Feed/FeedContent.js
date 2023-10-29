@@ -28,10 +28,10 @@ const FeedContent = () => {
           {
             isLoading?   
             sidebar_items.map(item =>
-             <>
-             <CardSkeleton key={item.id}/>
-             <CardSkeleton key={item.id}/>
-             </>)
+             <span key={item.id}>
+             <CardSkeleton />
+             <CardSkeleton />
+             </span>)
             // <p>Loading</p>
             :
             data && data.map(item => {
