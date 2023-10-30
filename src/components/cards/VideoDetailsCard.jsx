@@ -55,6 +55,7 @@ const VideoDetailsCard = ({ videoID }) => {
                 {/* video player */}
                 <iframe
                     id="ytplayer"
+                    type='text/html'
                     src={`http://www.youtube.com/embed/${videoID}?autoplay=1&enablejsapi=1`}
                     className='w-full lg:h-3/4 h-[300px] rounded-xl'
                 />
