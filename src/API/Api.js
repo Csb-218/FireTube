@@ -8,7 +8,7 @@ export  async function videosByCategory(videoCategoryId){
       regionCode : 'IN',
       videoCategoryId : videoCategoryId,
       key : process.env.NEXT_PUBLIC_API_KEY,
-      // maxResults : 30
+      maxResults : 30
     }
     try{
       const categoryVideos = await axios.get(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/videos`,{params})
@@ -138,4 +138,23 @@ export async function channelPlaylists(channelId){
     console.error(err)
   }
 
+}
+
+export async function searchVideos(keyword){
+  const params={
+    part:`snippet`,
+    // channelId: keyword,
+    regionCode:'IN',
+    q:keyword,
+    maxResults:25,
+    key:process.env.NEXT_PUBLIC_API_KEY
+  }
+  try{
+     const searchedVideos = await axios.get(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/search`,{params})
+     console.log(searchedVideos.data.items)
+     return searchedVideos?.data?.items
+  }
+  catch(err){
+    console.error(err)
+  }
 }

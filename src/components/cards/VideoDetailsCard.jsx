@@ -4,6 +4,7 @@ import { videoById, channelById } from '@/API/Api'
 import { useQuery,useQueries } from '@tanstack/react-query'
 import Months from '@/utils/Months';
 import YouTube from "react-youtube"; 
+import ReactPlayer from 'react-player'
 
 
 const VideoDetailsCard = ({ videoID }) => {
@@ -40,12 +41,18 @@ const VideoDetailsCard = ({ videoID }) => {
         return `${month} ${day}, ${year} `
     }
     const opts = { 
-        height: "700", 
-        width: "1175", 
+        height:"30rem",
+        width:"100%" , 
         playerVars: { 
-          autoplay: 1, 
+          autoplay: 0, 
         }, 
       }; 
+
+    const style = {
+        // 'object-fit':'cover'
+        // height:`300px`
+        width:'30rem'
+    };
 
     return (
         <>
@@ -53,20 +60,28 @@ const VideoDetailsCard = ({ videoID }) => {
             {/* video section */}
             <div className="h-full w-full flex flex-col gap-y-2  ">
                 {/* video player */}
-                <iframe
+                {/* <iframe
                     id="ytplayer"
                     type='text/html'
                     src={`http://www.youtube.com/embed/${videoID}?autoplay=1&enablejsapi=1`}
                     className='w-full lg:h-3/4 h-[300px] rounded-xl'
+                /> */}
+
+                <div className='w-full lg:h-full h-[300px] bg-red-400 rounded-xl'>
+
+                <ReactPlayer
+                  url={`http://www.youtube.com/embed/${videoID}?autoplay=1&enablejsapi=1`}
+                  height={'100%'}
+                  width={'100%'}
+                  style={{'object-fit':'cover'}}
                 />
 
-                 {/* className={'w-0'} */}
-                {/* <div className='w-full h-3/4  rounded-xl'> */}
                  {/* <YouTube 
                  videoId={`${videoID}`}
                  opts={opts}
                  /> */}
-                {/* </div> */}
+                 
+                </div>
                 
                 <div className="w-full h-auto px-4 text-3xl">
                     <p>{videoResults?.snippet.title}</p>

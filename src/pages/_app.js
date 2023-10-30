@@ -14,12 +14,13 @@ export default function App({ Component, pageProps }) {
   }, [])
 
   const sidebar_items = Constants()
-  const [select, setSelect] = useState(sidebar_items[0].id)
+  const [select, setSelect] = useState()
+  const [search_term,setSearch_term] = useState()
   const [queryClient] = useState(() => new QueryClient())
 
   return (
     <QueryClientProvider client={queryClient}>
-      <FeedContext.Provider value={{select,setSelect,sidebar_items}}>
+      <FeedContext.Provider value={{select,setSelect,sidebar_items,search_term,setSearch_term}}>
         <Component {...pageProps} />
       </FeedContext.Provider>
     </QueryClientProvider>

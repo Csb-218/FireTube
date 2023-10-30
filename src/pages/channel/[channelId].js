@@ -40,7 +40,7 @@ const channelId = () => {
 
   return (
     <>
-      <div>
+      <div className=" lg:w-full w-[500px]">
         <Navbar />
 
         <div className="  p-2 flex justify-center">
@@ -50,7 +50,7 @@ const channelId = () => {
           />
         </div>
 
-        <div className="p-2 flex">
+        <div className="p-2 flex lg:flex-row flex-col items-center">
           <img
             src={`${channelDetails?.snippet?.thumbnails?.high?.url}`}
             className='w-36 rounded-full'

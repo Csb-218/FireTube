@@ -1,5 +1,6 @@
 import { Offside } from 'next/font/google'
 import { useContext } from 'react'
+import { useFormik } from 'formik';
 import OffCanvas from './OffCanvas'
 import { FeedContext } from '../pages/_app'
 import { useRouter } from 'next/navigation'
@@ -8,19 +9,32 @@ import { useRouter } from 'next/navigation'
 
 function Navbar() {
 
-    const { select, setSelect, sidebar_items } = useContext(FeedContext)
+    const { select, setSelect, sidebar_items, search_term, setSearch_term } = useContext(FeedContext)
     const router = useRouter()
+
+    const formik = useFormik({
+        initialValues: {
+          searchInput: '',
+        },
+        onSubmit: values => {
+          
+           values.searchInput.length!==0 && setSearch_term(values.searchInput) 
+           setSelect()
+
+        //   alert(JSON.stringify(values, null, 2));
+        },
+      })
 
     return (
         <>
             <header className="flex flex-wrap w-[500px] lg:w-full sm:flex-nowrap  z-50 text-sm py-4 dark:bg-gray-800">
                 <div className="lg:block hidden">
-                   <OffCanvas />
+                    <OffCanvas />
                 </div>
-               
+
                 <nav className=" w-full  mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
                     <div className="flex items-center lg:justify-start justify-between w-full">
-                        <a className="inline-flex items-center gap-x-2 text-xl font-semibold dark:text-white" href="#">
+                        <a className="inline-flex items-center gap-x-2 text-xl font-semibold dark:text-white" href="/">
                             <div className="bg-transparent">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="red" className="bi bi-youtube" viewBox="0 0 16 16">
                                     <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z" />
@@ -29,7 +43,27 @@ function Navbar() {
                             FireTube
                         </a>
 
-                        <input type="text" className=" mx-10 py-3 px-4 block border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" placeholder="Search a video" />
+                        <form onSubmit={formik.handleSubmit}>
+
+                            <div className='inline-flex bg-black rounded-full mx-10'>
+                                <input
+                                    name='searchInput'
+                                    type="text"
+                                    className=" py-3 bg-transparent border-0 rounded-s-full text-sm "
+                                    onChange={formik.handleChange}
+                                    value={formik.values.searchInput}
+ 
+                                />
+
+                                <button type="submit" class="py-3 px-3  inline-flex justify-center items-center gap-2 rounded-e-full border-0 font-semibold  hover:text-white hover:bg-blue-500 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                    </svg>
+                                </button>
+                            </div>
+
+
+                        </form>
 
                         <div className="sm:hidden">
                             <button type="button" className="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800" data-hs-collapse="#navbar-image-and-text-1" aria-controls="navbar-image-and-text-1" aria-label="Toggle navigation">
