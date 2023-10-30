@@ -8,7 +8,7 @@ export  async function videosByCategory(videoCategoryId){
       regionCode : 'IN',
       videoCategoryId : videoCategoryId,
       key : process.env.NEXT_PUBLIC_API_KEY,
-      maxResults : 30
+      // maxResults : 30
     }
     try{
       const categoryVideos = await axios.get(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/videos`,{params})
@@ -89,7 +89,7 @@ const options = {
     channelId: channelId,
     part: 'snippet,id',
     order: 'date',
-    maxResults: '50'
+    maxResults: '20'
   },
   headers: {
     'X-RapidAPI-Key': 'b485fad166msh87e98db6a5ea489p17ef29jsncfc6a57f3847',
