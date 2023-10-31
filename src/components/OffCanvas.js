@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 
 function OffCanvas() {
 
-  const {select,setSelect,sidebar_items,setSearch_term} = useContext(FeedContext)
+  const {select,setSelect,sidebar_items,setSearch_term,setFeed} = useContext(FeedContext)
   const router = useRouter()
   // const sidebar_items = Constants()
   // const [select, setSelect] = useState(sidebar_items[0].tab)
@@ -44,9 +44,10 @@ function OffCanvas() {
                 return (
                   <div 
                   key={sidebar_items.indexOf(item)}
-                  className={select === item.id ? "selected_tab cursor-pointer " : "unselected_tab cursor-pointer"} 
+                  className={select === item.id ? "selected_tab cursor-pointer " : "unselected_tab cursor-pointer "} 
                   onClick={() =>{
                     setSelect(item.id)
+                    setFeed('category')
                     setSearch_term()
                     router.push('/')
                     }}>

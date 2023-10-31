@@ -29,14 +29,14 @@ body {
 /* App Css */
 
 .selected_tab{
-  @apply basis-0 grow py-3 px-4 lg:flex hidden lg:justify-center justify-start items-start gap-2 bg-red-600 text-sm font-medium text-center text-white rounded-lg
+  @apply basis-0 grow py-3 px-4 lg:flex hidden lg:justify-center justify-start items-start gap-2 bg-gray-700 text-sm font-medium text-center text-white rounded-lg
 }
 .unselected_tab{
-  @apply basis-0 grow py-3 px-4 lg:flex hidden lg:justify-center justify-start items-center gap-2 bg-transparent text-sm font-medium text-center text-black rounded-lg
+  @apply basis-0 grow py-3 px-4 lg:flex hidden lg:justify-center justify-start items-center gap-2 bg-transparent text-sm font-medium text-center text-white rounded-lg
 }
 .selected_tab_sm{
-  @apply basis-0 grow py-3 px-4 lg:hidden md:hidden flex lg:justify-center justify-start items-start gap-2 bg-red-600 text-sm font-medium text-center text-white rounded-lg
+  @apply basis-0 grow py-3 px-4 lg:hidden md:hidden flex lg:justify-center justify-start items-start gap-2 bg-gray-700 text-sm font-medium text-center text-white rounded-lg
 }
 .unselected_tab_sm{
-  @apply basis-0 grow py-3 px-4 lg:hidden md:hidden flex lg:justify-center justify-start items-center gap-2 bg-transparent text-sm font-medium text-center text-black rounded-lg
+  @apply basis-0 grow py-3 px-4 lg:hidden md:hidden flex lg:justify-center justify-start items-center gap-2 bg-transparent text-sm font-medium text-center text-white rounded-lg
 }

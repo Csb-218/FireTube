@@ -21,6 +21,26 @@ export  async function videosByCategory(videoCategoryId){
     }
 }
 
+export  async function FeedVideos(){
+
+  const params ={
+    part : 'snippet',
+    chart : 'mostPopular',
+    regionCode : 'IN',
+    key : process.env.NEXT_PUBLIC_API_KEY,
+    maxResults : 30
+  }
+  try{
+    const categoryVideos = await axios.get(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/videos`,{params})
+    // console.log(categoryVideos)
+  //   console.log(categoryVideos)
+    return categoryVideos.data.items
+  }
+  catch(err){
+    console.error(err,121)
+  }
+}
+
 export async function videoById(videoId){
 
   const params={
@@ -151,10 +171,12 @@ export async function searchVideos(keyword){
   }
   try{
      const searchedVideos = await axios.get(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/search`,{params})
-     console.log(searchedVideos.data.items)
+     console.log(searchedVideos.data)
      return searchedVideos?.data?.items
   }
   catch(err){
     console.error(err)
   }
 }
+
+

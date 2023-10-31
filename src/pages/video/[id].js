@@ -12,7 +12,7 @@ import { useQuery, useQueries } from '@tanstack/react-query'
 
 const video = () => {
 
-  const sidebar_items = Constants()
+  const {sidebar_items} = Constants()
   const [select, setSelect] = useState(sidebar_items[0].id)
   const router = useRouter()
   const { id } = router.query

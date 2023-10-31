@@ -68,10 +68,14 @@ const Constants = () => {
     </svg>
     }
   ]
+  const feedState = ['homefeed','search','category']
 
 
   return (
-    sidebar_items
+    {
+      sidebar_items : sidebar_items,
+      feedState: feedState
+    }
   )
 }
 
