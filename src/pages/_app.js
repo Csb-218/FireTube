@@ -1,9 +1,9 @@
+'use client;'
 import '@/styles/globals.css'
 import { useEffect, useState ,createContext} from 'react'
-'use client;'
 import {QueryClient,QueryClientProvider} from '@tanstack/react-query'
 import Constants from '../utils/Constants'
-
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 const FeedContext = createContext();
 
@@ -21,11 +21,14 @@ export default function App({ Component, pageProps }) {
   const [queryClient] = useState(() => new QueryClient())
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <UserProvider>
+      <QueryClientProvider client={queryClient}>
       <FeedContext.Provider value={{select,setSelect,sidebar_items,search_term,setSearch_term , feed_state , setFeed}}>
         <Component {...pageProps} />
       </FeedContext.Provider>
     </QueryClientProvider>
+    </UserProvider>
+    
   )
 
 }

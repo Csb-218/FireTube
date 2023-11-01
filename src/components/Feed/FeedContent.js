@@ -4,6 +4,7 @@ import { FeedContext } from '../../pages/_app'
 import VideoCard from '../cards/VideoCard'
 import { videosByCategory, searchVideos, FeedVideos } from "../../API/Api"
 import CardSkeleton from '../skeletons/CardSkeleton'
+import ChannelCard from '../cards/ChannelCard'
 
 
 
@@ -83,8 +84,9 @@ const FeedContent = () => {
                 </span>)
               :
               sData && sData.map(item => {
-                // console.log(item)
-                return (
+                 
+                if(item?.id?.kind === 'youtube#video'){
+                  return (
                   <VideoCard
                     key={item.id.videoId}
                     videoId={item.id.videoId}
@@ -94,7 +96,20 @@ const FeedContent = () => {
                     description={item.snippet.description}
                     channelTitle={item.snippet.channelTitle}
                   />
-                )
+                )}
+                if(item?.id?.kind === "youtube#channel"){
+                  return (
+                  <ChannelCard
+                   key={item?.id?.channelId}
+                   channelId={item?.id?.channelId}
+                   thumbnail={item?.snippet?.thumbnails?.high?.url}
+                   title={item?.snippet?.title}
+                   description={item?.snippet?.description}
+                  
+                  />
+                )}
+
+                
               })
           }
           {

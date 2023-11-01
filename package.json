@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^3.2.0",
     "@preline/overlay": "^1.4.0",
     "@tanstack/react-query": "^5.0.5",
     "axios": "^1.5.1",
