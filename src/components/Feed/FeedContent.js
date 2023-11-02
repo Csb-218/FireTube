@@ -9,9 +9,41 @@ import ChannelCard from '../cards/ChannelCard'
 
 
 
+
 const FeedContent = () => {
 
+  const [lazyLoad,setLazy] = useState(0)
 
+   const handleScroll = async() =>{
+     try {
+      // console.log('scrollHeight',document.documentElement.scrollHeight)
+      // console.log('innerHeight',window.innerHeight)
+      // console.log('scrollTop',document.documentElement.scrollTop)
+      // console.log(window.scrollY)
+
+      const scrollHeight = document.documentElement.scrollHeight
+      const scrolledBy = window.scrollY
+      const innerHeight = window.innerHeight
+      if((scrolledBy + innerHeight + 5) >= scrollHeight ){
+        console.log('fetch')
+        window.scrollBy(0,-50)
+        setLazy(a => a+1)
+        
+      }
+      
+     } catch (error) {
+      console.log(error)
+     }
+   }
+
+   useEffect(() => {
+     window.addEventListener('scroll',handleScroll)
+   }, [])
+   
+  
+  
+   
+  
   const { select, setSelect, sidebar_items, search_term, setSearch_term ,feed_state , setFeed} = useContext(FeedContext)
 
   const { isLoading: catLoading, isPending: catPending, isError: catIsError, data: catData, error: catError } = useQuery({
@@ -35,9 +67,10 @@ const FeedContent = () => {
 
   })
   const { isLoading: feedLoading, isPending: feedPending, isError: feedIsError, data: feedData, error: feedError } = useQuery({
-    queryKey: ['feedvideos', feed_state],
-    queryFn: () => FeedVideos(),
+    queryKey: ['feedvideos',lazyLoad],
+    queryFn: () => FeedVideos(pToken),
     enabled: feed_state==='homefeed',
+    keepPreviousData:true,
     refetchIntervalInBackground:false,
     refetchOnMount:false,
     refetchOnReconnect:false,
@@ -45,11 +78,13 @@ const FeedContent = () => {
 
   })
 
+  const pToken = feedData?.nextPageToken
+
   return (
     <>
       {/* {console.log(isLoading,isPending, isError,data)} */}
-
-      <div className=" w-[500px] lg:w-full  px-4 py-10 sm:px-6 lg:px-2 lg:py-14 mx-auto ">
+      { console.log(lazyLoad,feedData,pToken)}
+      <div className=" w-[500px] lg:w-full  px-4 py-10 sm:px-6 lg:px-2 lg:py-14 mx-auto  " >
         <div className="w-full  grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {
             catLoading ?
@@ -120,7 +155,7 @@ const FeedContent = () => {
                   <CardSkeleton />
                 </span>)
               :
-              feedData && feedData.map(item => {
+              feedData?.items?.map(item => {
                 // console.log(item)
                 return (
                   <VideoCard
