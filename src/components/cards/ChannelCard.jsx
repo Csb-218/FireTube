@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 
 const ChannelCard = ({title,thumbnail,description,channelId}) => {
-    console.log(thumbnail)
+    // console.log(thumbnail)
     return (
         <Link href={`/channel/${channelId}`}>
         <div className="bg-white border rounded-xl shadow-sm sm:flex dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">

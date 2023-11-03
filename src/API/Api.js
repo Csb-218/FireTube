@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export  async function videosByCategory(videoCategoryId){
+export  async function videosByCategory(videoCategoryId,pToken){
 
     const params ={
       part : 'snippet',
@@ -8,13 +8,14 @@ export  async function videosByCategory(videoCategoryId){
       regionCode : 'IN',
       videoCategoryId : videoCategoryId,
       key : process.env.NEXT_PUBLIC_API_KEY,
-      maxResults : 30
+      maxResults : 30,
+      pageToken:pToken
     }
     try{
       const categoryVideos = await axios.get(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/videos`,{params})
-      // console.log(categoryVideos)
+      console.log(categoryVideos)
     //   console.log(categoryVideos)
-      return categoryVideos.data.items
+      return categoryVideos?.data
     }
     catch(err){
       console.error(err,121)
@@ -22,7 +23,7 @@ export  async function videosByCategory(videoCategoryId){
 }
 
 export  async function FeedVideos(pToken){
-
+  // console.log(pToken,25)
   const params ={
     part : 'snippet',
     chart : 'mostPopular',
@@ -34,7 +35,7 @@ export  async function FeedVideos(pToken){
   try{
     const categoryVideos = await axios.get(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/videos`,{params})
     // console.log(categoryVideos)
-  //   console.log(categoryVideos)
+    // console.log(categoryVideos)
     return categoryVideos.data
   }
   catch(err){
@@ -161,19 +162,21 @@ export async function channelPlaylists(channelId){
 
 }
 
-export async function searchVideos(keyword){
+export async function searchVideos(keyword,pToken){
+ 
   const params={
     part:`snippet`,
-    // channelId: keyword,
     regionCode:'IN',
     q:keyword,
     maxResults:25,
+    pageToken:pToken,
     key:process.env.NEXT_PUBLIC_API_KEY
   }
   try{
+     console.log('hi',keyword,pToken)
      const searchedVideos = await axios.get(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/search`,{params})
-     console.log(searchedVideos.data)
-     return searchedVideos?.data?.items
+    //  console.log(11111111111)
+     return searchedVideos?.data
   }
   catch(err){
     console.error(err)
