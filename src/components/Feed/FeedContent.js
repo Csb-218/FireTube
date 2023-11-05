@@ -7,42 +7,7 @@ import CardSkeleton from '../skeletons/CardSkeleton'
 import ChannelCard from '../cards/ChannelCard'
 
 
-
-
-
 const FeedContent = () => {
-
-  const [lazyLoad,setLazy] = useState(0)
-
-   const handleScroll = async() =>{
-     try {
-      // console.log('scrollHeight',document.documentElement.scrollHeight)
-      // console.log('innerHeight',window.innerHeight)
-      // console.log('scrollTop',document.documentElement.scrollTop)
-      // console.log(window.scrollY)
-
-      const scrollHeight = document.documentElement.scrollHeight
-      const scrolledBy = window.scrollY
-      const innerHeight = window.innerHeight
-      if((scrolledBy + innerHeight + 5) >= scrollHeight ){
-        console.log('fetch')
-        window.scrollBy(0,-50)
-        setLazy(a => a+1)
-        
-      }
-      
-     } catch (error) {
-      console.log(error)
-     }
-   }
-
-   useEffect(() => {
-     window.addEventListener('scroll',handleScroll)
-   }, [])
-   
-  
-  
-   
   
   const { select, setSelect, sidebar_items, search_term, setSearch_term ,feed_state , setFeed} = useContext(FeedContext)
 
@@ -83,7 +48,7 @@ const FeedContent = () => {
   return (
     <>
       {/* {console.log(isLoading,isPending, isError,data)} */}
-      { console.log(lazyLoad,feedData)}
+ 
       <div className=" w-[500px] lg:w-full  px-4 py-10 sm:px-6 lg:px-2 lg:py-14 mx-auto  " >
         <div className="w-full  grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {
@@ -115,7 +80,6 @@ const FeedContent = () => {
               sidebar_items.map(item =>
                 <span key={item.id+1}>
                   <CardSkeleton />
-                  <CardSkeleton />
                 </span>)
               :
               sData && sData.map(item => {
@@ -140,11 +104,8 @@ const FeedContent = () => {
                    thumbnail={item?.snippet?.thumbnails?.high?.url}
                    title={item?.snippet?.title}
                    description={item?.snippet?.description}
-                  
                   />
                 )}
-
-                
               })
           }
           {
