@@ -13,10 +13,10 @@ const VideoCard = ({videoData,videoId,thumbnail,title,description,channelTitle})
             </div>
             <div className="p-2 h-2/5 ">
                 
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-300 dark:hover:text-white">
-                    {title.length<51? title : title.slice(0,50)+'...'}
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-300 truncate dark:hover:text-white h-1/2">
+                    {title}
                 </h3>
-                <p className="mt-3 text-gray-500">
+                <p className="mt-3 text-gray-500 ">
                     {channelTitle}
                 </p>
             </div>
