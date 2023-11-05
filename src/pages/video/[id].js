@@ -7,6 +7,7 @@ import Constants from '../../utils/Constants'
 import VideoDetailsCard from '@/components/cards/VideoDetailsCard'
 import SuggestedVideoCard from '@/components/cards/SuggestedVideoCard'
 import { useQuery, useQueries } from '@tanstack/react-query'
+import Sugg_Skeleton from '@/components/skeletons/Sugg_Skeleton'
 
 
 
@@ -34,7 +35,8 @@ const video = () => {
           <VideoDetailsCard videoID={id} />
         </div>
         <div className="lg:w-1/4 md:w-full sm:w-full h-full overflow-scroll p-1 ">
-          {
+          { 
+            suggestedVideos?
             suggestedVideos?.map(video => {
               console.log(video)
               const thumbnail = video?.snippet?.thumbnails?.high?.url
@@ -51,6 +53,9 @@ const video = () => {
                 />
               )
             })
+            :
+            sidebar_items.map(item => <Sugg_Skeleton/>)
+            
           }
 
         </div>

@@ -3,7 +3,7 @@ import React from 'react'
 const CardSkeleton = () => {
     return (
 
-        <div className="group flex h-52 flex-col space-y-1 animate-pulse shadow-sm rounded-xl ">
+        <div className="group flex h-52 flex-col space-y-1 animate-pulse shadow-sm rounded-xl m-2">
          
          <div className="h-3/5 bg-gray-800 rounded-xl"></div>
          
