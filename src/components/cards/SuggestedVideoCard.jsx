@@ -15,8 +15,8 @@ const SuggestedVideoCard = ({thumbnail,title,channel,id}) => {
 
   return (
     <Link href={`/video/${id}`}>
-        <div className=" lg:h-1/6   flex gap-x-1 my-1 rounded-xl overflow-clip hover:shadow-sm border-2 hover:shadow-gray-500 transition-transform ">
-        <div className="w-1/2  bg-orange-500 ">
+        <div className=" lg:h-1/6   flex gap-x-1 my-1 rounded-xl overflow-clip hover:shadow-sm  hover:shadow-gray-500 transition-transform ">
+        <div className="w-1/2  ">
           <img 
           src={`${thumbnail}`}
           className="w-full h-full object-cover"
