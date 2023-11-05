@@ -21,7 +21,7 @@ const VideoDetailsCard = ({ videoID }) => {
     })
     let videoResults = queryResults?.[0].data
     // let suggestedVideos = queryResults?.[1].data
-    let channelId = videoResults?.snippet?.channelId
+    let channelId = queryResults?.[0].data?.snippet?.channelId
 
     const { data: channelResults, status } = useQuery(
         {
@@ -67,8 +67,8 @@ const VideoDetailsCard = ({ videoID }) => {
                     className='w-full lg:h-3/4 h-[300px] rounded-xl'
                 /> */}
 
-                <div className='w-full lg:h-full h-[300px] bg-red-400 rounded-xl'>
-
+                <div className='w-full lg:h-full h-[300px] rounded-xl'>
+                
                 <ReactPlayer
                   url={`http://www.youtube.com/embed/${videoID}?autoplay=1&enablejsapi=1`}
                   height={'100%'}
@@ -84,27 +84,27 @@ const VideoDetailsCard = ({ videoID }) => {
                 </div>
                 
                 <div className="w-full h-auto px-4 text-3xl">
-                    <p>{videoResults?.snippet.title}</p>
+                    <p>{videoResults?.snippet?.title}</p>
                 </div>
                 
                 {/* channel details */}
                 <div className='w-full h-auto p-4 rounded-xl '>
                     <div className='flex gap-x-10 items-center cursor-pointer' onClick={()=> router.push(`/channel/${channelId}`)}>
                         <img
-                            src={`${channelResults?.snippet.thumbnails.high.url}`}
+                            src={`${channelResults?.snippet?.thumbnails?.high?.url}`}
                             className="w-12 h-12 rounded-full border-2"
                             alt="" 
                         />
                         <div>
-                            <p className="text-xl">{channelResults?.snippet.title}</p>
-                            <p className="text-xs text-slate-300">{channelResults?.statistics.subscriberCount} subscribers</p>
+                            <p className="text-xl">{channelResults?.snippet?.title}</p>
+                            <p className="text-xs text-slate-300">{channelResults?.statistics?.subscriberCount} subscribers</p>
                         </div>
                     </div>
                 </div>
                 {/* video description */}
                 <div className='w-full lg:h-1/5 h-60 overflow-scroll rounded-xl bg-neutral-700 p-4'>
-                    <p>{videoResults?.statistics.viewCount} views premiered on {premieredDate(videoResults?.snippet.publishedAt)}</p>
-                    <p>{videoResults?.snippet.description}</p>
+                    <p>{videoResults?.statistics?.viewCount} views premiered on {premieredDate(videoResults?.snippet?.publishedAt)}</p>
+                    <p>{videoResults?.snippet?.description}</p>
                 </div>
 
 
