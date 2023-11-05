@@ -10,8 +10,7 @@ function Feed() {
 
   return (
     <>
-       <Navbar />
-       <FeedContent />
+      <FeedContent/>
     </>
   )
 }

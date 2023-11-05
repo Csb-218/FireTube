@@ -1,4 +1,4 @@
-'use client';
+
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { Offside } from 'next/font/google'
 import { useContext } from 'react'
@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation'
 
 function Navbar() {
 
-    const { select, setSelect, sidebar_items, search_term, setSearch_term, setFeed } = useContext(FeedContext)
+    const { select, setSelect, sidebar_items} = useContext(FeedContext)
     const router = useRouter()
     const { user, error, isLoading } = useUser();
 
@@ -20,10 +20,9 @@ function Navbar() {
             searchInput: '',
         },
         onSubmit: values => {
-            router.push('/')
-            setSearch_term(() => values.searchInput)
+            router.push(`/search/query=${values.searchInput}`)
+            setTerm(() => values.searchInput)
             setSelect()
-            setFeed('search')
             //   alert(JSON.stringify(values, null, 2));
         },
     })
@@ -60,7 +59,7 @@ function Navbar() {
                                 />
 
                                 <button type="submit"
-                                    // onClick={setSearch_term(formik.values.searchInput)}
+
                                     className="py-3 px-3  inline-flex justify-center items-center gap-2 rounded-e-full border-0 font-semibold  hover:text-white hover:bg-red-500 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
                                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
@@ -127,7 +126,7 @@ function Navbar() {
 
                             <span className="text-gray-600 font-medium truncate max-w-[7.5rem] dark:text-gray-400">{user?.name}</span>
                             <svg className="hs-dropdown-open:rotate-180 w-2.5 h-2.5 text-gray-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                                <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                             </svg>
                         </button>
 
