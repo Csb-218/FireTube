@@ -8,7 +8,7 @@ export  async function videosByCategory(videoCategoryId,pToken){
       regionCode : 'IN',
       videoCategoryId : videoCategoryId,
       key : process.env.NEXT_PUBLIC_API_KEY,
-      maxResults : 30,
+      maxResults : 28,
       pageToken:pToken
     }
     try{
@@ -29,7 +29,7 @@ export  async function FeedVideos(pToken){
     chart : 'mostPopular',
     regionCode : 'IN',
     key : process.env.NEXT_PUBLIC_API_KEY,
-    maxResults : 30,
+    maxResults : 28,
     pageToken:pToken
   }
   try{
@@ -52,6 +52,7 @@ export async function videoById(videoId){
   }
   try{
     const video = await axios.get(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/videos`,{params})
+    console.log(video.data)
     return video.data.items[0]
   }
   catch(err){
@@ -168,7 +169,8 @@ export async function searchVideos(keyword,pToken){
     part:`snippet`,
     regionCode:'IN',
     q:keyword,
-    maxResults:25,
+    type:'video',
+    maxResults:28,
     pageToken:pToken,
     key:process.env.NEXT_PUBLIC_API_KEY
   }
