@@ -8,8 +8,6 @@ function Feed() {
   // const sidebar_items = Constants()
   // const [select, setSelect] = useState(sidebar_items[0].id)
 
-
-
   return (
     <>
        <Navbar />
