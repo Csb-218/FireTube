@@ -28,9 +28,8 @@ const video = () => {
 
   return (
     <>
-      <Navbar />
 
-      <div className='p-4 lg:h-screen h-auto flex flex-col lg:flex-row lg:gap-x-2  lg:w-auto  w-[500px]  '>
+      <div className='p-4  h-auto flex flex-col lg:flex-row lg:gap-x-2  lg:w-auto  w-[500px]  '>
         <div className="lg:w-3/4 w-full ">
           <VideoDetailsCard videoID={id} />
         </div>

@@ -35,6 +35,7 @@ const FeedContent = () => {
   const { 
     data: feedData,
     error: feedError,
+    isError: isFeedError,
     fetchNextPage: fetchFeed,
     hasNextPage: hasNextFeed,
     isFetching: isFeedFetching,
@@ -93,12 +94,17 @@ const FeedContent = () => {
                  <CardSkeleton />
                </span>)
                :
+               isFeedError?
+               'Error Loading videos !'
+               :
                 !hasNextFeed? 
                'No more videos'
                :
+               null
                
-               'Error Loading videos !'
+               
           }
+          {console.log(isFeedError,feedStatus)}
         </div>
       </div>
     </>

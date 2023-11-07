@@ -67,7 +67,7 @@ const VideoDetailsCard = ({ videoID }) => {
                     className='w-full lg:h-3/4 h-[300px] rounded-xl'
                 /> */}
 
-                <div className='w-full lg:h-full h-[300px] rounded-xl'>
+                <div className='w-full lg:h-[800px] h-[300px] rounded-xl'>
                 
                 <ReactPlayer
                   url={`http://www.youtube.com/embed/${videoID}?autoplay=1&enablejsapi=1`}
@@ -102,7 +102,7 @@ const VideoDetailsCard = ({ videoID }) => {
                     </div>
                 </div>
                 {/* video description */}
-                <div className='w-full lg:h-1/5 h-60 overflow-scroll rounded-xl bg-neutral-700 p-4'>
+                <div className='w-full lg:h-auto h-60 overflow-scroll rounded-xl bg-neutral-700 p-4'>
                     <p>{videoResults?.statistics?.viewCount} views premiered on {premieredDate(videoResults?.snippet?.publishedAt)}</p>
                     <p>{videoResults?.snippet?.description}</p>
                 </div>

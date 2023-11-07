@@ -52,7 +52,7 @@ export async function videoById(videoId){
   }
   try{
     const video = await axios.get(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/videos`,{params})
-    console.log(video.data)
+    console.log(video.data.items[0])
     return video.data.items[0]
   }
   catch(err){
