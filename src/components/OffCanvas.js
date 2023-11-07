@@ -18,7 +18,7 @@ function OffCanvas() {
         </svg>
       </button>
 
-      <div id="hs-overlay-example" className="hs-overlay hs-overlay-open:translate-x-0  -translate-x-full fixed top-0 left-0 transition-all duration-300 transform h-full max-w-xs w-full z-[60] bg-white border-r dark:bg-gray-800 dark:border-gray-700 hidden [--overlay-backdrop:false]" tabIndex="-1">
+      <div id="hs-overlay-example" className="hs-overlay hs-overlay-open:translate-x-0  -translate-x-full fixed top-0 left-0 transition-all duration-300 transform h-full max-w-xs w-full z-[60] bg-white border-r dark:bg-black dark:border-gray-700 hidden [--overlay-backdrop:false]" tabIndex="-1">
         <div className="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
 
           <div className="flex items-center gap-2">
@@ -38,7 +38,7 @@ function OffCanvas() {
           </button>
         </div>
         <div className="p-4">
-          <nav className="flex flex-col space-x-2">
+          <nav className="flex flex-col lg:space-x-2">
             {
               sidebar_items && sidebar_items.map(item => {
                 return (

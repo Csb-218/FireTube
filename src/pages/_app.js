@@ -7,6 +7,7 @@ import { UserProvider } from '@auth0/nextjs-auth0/client';
 import Navbar from '@/components/Navbar'
 const FeedContext = createContext();
 import { useUser } from '@auth0/nextjs-auth0/client'
+import Navbar2 from '@/components/Navbar2'
 
 export default function App({ Component, pageProps }) {
 
@@ -25,7 +26,8 @@ export default function App({ Component, pageProps }) {
     <UserProvider>
       <QueryClientProvider client={queryClient}>
         <FeedContext.Provider value={{searchTerm,setTerm,select,setSelect,sidebar_items}}>
-          <Navbar />
+          {/* <Navbar /> */}
+          <Navbar2/>
           <Component {...pageProps} />
         </FeedContext.Provider>
       </QueryClientProvider>

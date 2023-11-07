@@ -57,7 +57,7 @@ const search_query = () => {
 
     return (
         <>
-        <div className=" w-[500px] lg:w-full  px-4 py-10 sm:px-6 lg:px-2 lg:py-14 mx-auto flex justify-center  " >
+        <div className="w-screen  px-4 py-10 sm:px-6 lg:px-2 lg:py-14 mx-auto flex justify-center  " >
             <div className="lg:w-9/12  grid grid-cols-1 gap-y-2">
                 
                 {

@@ -57,8 +57,8 @@ const category = () => {
       })
   return (
 
-    <div className=" w-[500px] lg:w-full  px-4 py-10 sm:px-6 lg:px-2 lg:py-14 mx-auto  " >
-        <div className="w-full  grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className=" w-screen  px-4 py-0 sm:px-6 lg:px-2 lg:py-5 mx-auto   " >
+        <div className="w-full  grid grid-cols-1 lg:grid-cols-4 gap-6">
         {
             catLoading ?
               sidebar_items.map(item =>
@@ -79,6 +79,7 @@ const category = () => {
                     title={item.snippet.title}
                     description={item.snippet.description}
                     channelTitle={item.snippet.channelTitle}
+                    channelId={item.snippet.channelId}
                   />
                     )
                 )
