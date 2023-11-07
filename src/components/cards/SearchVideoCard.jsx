@@ -24,7 +24,7 @@ const SearchVideoCard = ({videoId,thumbnail, title, description, channelTitle,ch
 
     return (
         <>
-        {console.log(videoData)}
+        {/* {console.log(videoData)} */}
         <Link href={`/video/${videoId}`}>
         <div className="w-full h-full  bg-transparent  shadow-sm flex flex-col sm:flex-row bg-yellow-400">
                 <div className="sm:w-full lg:w-1/3 rounded-xl sm:rounded-l-xl bg-indigo-400 h-auto">
