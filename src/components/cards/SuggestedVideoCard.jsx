@@ -25,7 +25,7 @@ const SuggestedVideoCard = ({thumbnail,title,channel,id}) => {
         </div>
         <div className="w-1/2 py-4 grid grid-cols-1 gap-y-1 content-center   ">
            {/* <p>{title.length > 58 ? `${title.slice(0,58)}...` : title}</p> */}
-           <p className=" text-base ">
+           <p className=" text-base h-1/3 bg-green-600">
             {title.length > 65 ? `${title.slice(0,65)}...` : title}
           </p>
            <p className='lg:text-xs text-sm dark:text-gray-300  '>{channel}</p>

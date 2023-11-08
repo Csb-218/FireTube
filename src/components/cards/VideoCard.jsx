@@ -6,6 +6,7 @@ import { channelById } from '@/API/Api'
 
 const VideoCard = ({ videoData, videoId, thumbnail, title, description, channelTitle, channelId }) => {
 
+ 
     const { data: channelData } = useQuery({
         queryKey: ['channelId', channelId],
         queryFn: () => channelById(channelId),
@@ -24,7 +25,7 @@ const VideoCard = ({ videoData, videoId, thumbnail, title, description, channelT
                     </div>
                     <div className="p-1 h-1/5 ">
 
-                        <h3 className="lg:text-xl text-sm font-semibold text-gray-800 dark:text-gray-300 truncate dark:hover:text-white h-1/2">
+                        <h3 className="lg:text-xl text-sm font-semibold text-gray-800 dark:text-gray-300 truncate dark:hover:text-white ">
                             {title}
                         </h3>
                         <div className='flex space-x-2 justify-stretch items-center my-1'>
