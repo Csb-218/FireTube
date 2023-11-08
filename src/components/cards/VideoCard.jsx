@@ -16,7 +16,7 @@ const VideoCard = ({ videoData, videoId, thumbnail, title, description, channelT
 
     return (
         <>
-            {console.log(channelData)}
+            {console.log(channelData,channelProfile)}
             <Link href={`/video/${videoId}`}>
                 <div className="group flex flex-col h-full  shadow-sm rounded-xl  ">
                     <div className="lg:h-52 h- flex flex-col justify-center items-center  rounded-xl overflow-clip">

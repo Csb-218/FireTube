@@ -58,8 +58,9 @@ export async function channelById(channelId){
       id:channelId,
       key:process.env.NEXT_PUBLIC_API_KEY
     }
-  const response = await axios.get(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/channels`,{params})
-  return response
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/channels?part=snippet%2CcontentDetails%2Cstatistics%2CbrandingSettings&id=${channelId}&key=${process.env.NEXT_PUBLIC_API_KEY}`)
+
+  return response?.data?.items?.[0]
 
 }
 

@@ -41,7 +41,7 @@ const channelId = () => {
   return (
     <>
       <div className=" lg:w-full w-[500px]">
-        <Navbar />
+        
 
         <div className="  p-2 flex justify-center">
           <img

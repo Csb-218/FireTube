@@ -5,6 +5,7 @@ import VideoCard from '../cards/VideoCard'
 import { videosByCategory, searchVideos, FeedVideos } from "../../API/Api"
 import CardSkeleton from '../skeletons/CardSkeleton'
 import ChannelCard from '../cards/ChannelCard'
+import channelId from '@/pages/channel/[channelId]'
 
 
 
@@ -80,6 +81,7 @@ const FeedContent = () => {
                           title={item.snippet.title}
                           description={item.snippet.description}
                           channelTitle={item.snippet.channelTitle}
+                          channelId={item?.snippet?.channelId}
                         />
                       )
                     )
@@ -101,8 +103,6 @@ const FeedContent = () => {
                'No more videos'
                :
                null
-               
-               
           }
           {console.log(isFeedError,feedStatus)}
         </div>
