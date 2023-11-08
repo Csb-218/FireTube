@@ -28,9 +28,9 @@ const VideoCard = ({ videoData, videoId, thumbnail, title, description, channelT
                             {title}
                         </h3>
                         <div className='flex space-x-2 justify-stretch items-center my-1'>
-                            <img src={channelProfile}
+                            {channelProfile && <img src={channelProfile}
                                 className='w-[2rem] h-[2rem] rounded-full'
-                            />
+                            />}
                             <p className="lg:mt-3 mt-1 text-gray-500 ">
                                 {channelTitle}
                             </p>

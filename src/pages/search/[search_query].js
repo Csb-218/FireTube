@@ -7,6 +7,7 @@ import { videosByCategory, searchVideos, FeedVideos } from "../../API/Api"
 import CardSkeleton from '../../components/skeletons/CardSkeleton'
 import ChannelCard from '../../components/cards/ChannelCard'
 import SearchVideoCard from '@/components/cards/SearchVideoCard'
+import ErrorBlock from '@/components/Errors/ErrorBlock'
 
 const search_query = () => {
 
@@ -111,10 +112,13 @@ const search_query = () => {
                                 <CardSkeleton />
                             </span>)
                         :
-                        !hasNextSearch ?
-                            'No more videos'
-                            :
-                            'Error Loading videos !'
+                        searchError?
+                        <ErrorBlock/>
+                        :
+                         !hasNextSearch? 
+                        'No more videos'
+                        :
+                        null
                 }
             </div>
         </div>

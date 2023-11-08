@@ -6,6 +6,7 @@ import VideoCard from '../../components/cards/VideoCard'
 import { videosByCategory, searchVideos, FeedVideos } from "../../API/Api"
 import CardSkeleton from '../../components/skeletons/CardSkeleton'
 import ChannelCard from '../../components/cards/ChannelCard'
+import ErrorBlock from '@/components/Errors/ErrorBlock'
 
 
 
@@ -37,7 +38,7 @@ const category = () => {
     const { 
         isLoading: catLoading, 
         isPending: catPending, 
-        isError: catIsError, 
+        isError: IsCatError, 
         data: catData, 
         error: catError ,
         fetchNextPage: fetchCat,
@@ -92,13 +93,16 @@ const category = () => {
                  <CardSkeleton />
                  <CardSkeleton />
                </span>)
-               :
-               !hasNextCat ? 
-               'No more videos'
-               :
-               'Error Loading videos !'
+              :
+               IsCatError?
+              <ErrorBlock/>
+              :
+               !hasNextCat? 
+              'No more videos'
+              :
+              null
           }
-
+      
         </div>
     </div>
   )
