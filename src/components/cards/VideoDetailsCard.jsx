@@ -5,7 +5,7 @@ import { useQuery,useQueries } from '@tanstack/react-query'
 import Months from '@/utils/Months';
 import YouTube from "react-youtube"; 
 import ReactPlayer from 'react-player'
-
+import stats from '@/utils/stats';
 
 const VideoDetailsCard = ({ videoID }) => {
     const router = useRouter()
@@ -103,7 +103,7 @@ const VideoDetailsCard = ({ videoID }) => {
                 </div>
                 {/* video description */}
                 <div className='w-full lg:h-auto h-60 overflow-scroll rounded-xl bg-neutral-700 p-4'>
-                    <p>{videoResults?.statistics?.viewCount} views premiered on {premieredDate(videoResults?.snippet?.publishedAt)}</p>
+                    <p>{stats(videoResults?.statistics?.viewCount)} views premiered on {premieredDate(videoResults?.snippet?.publishedAt)}</p>
                     <p>{videoResults?.snippet?.description}</p>
                 </div>
 
