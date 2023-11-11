@@ -4,7 +4,7 @@ const ErrorBlock = () => {
     return (
         
            
-                <div class="flex flex-col mx-auto w-screen h-full">
+                <div class="flex flex-col mx-auto w-screen h-full my-20">
                     <div class="text-center py-10 px-4 sm:px-6 lg:px-8">
                         <h1 class="block text-7xl font-bold text-gray-800 sm:text-9xl dark:text-white">403</h1>
                         <h1 class="block text-2xl font-bold text-white"></h1>

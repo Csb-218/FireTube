@@ -56,10 +56,12 @@ const category = () => {
         refetchOnWindowFocus: false
     
       })
-  return (
 
+      
+  return (
     <div className=" w-screen  px-4 py-0 sm:px-6 lg:px-2 lg:py-5 mx-auto   " >
         <div className="w-full  grid grid-cols-1 lg:grid-cols-4 gap-6">
+          {console.log(catError,IsCatError,catData)}
         {
             catLoading ?
               sidebar_items.map(item =>

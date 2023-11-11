@@ -4,7 +4,7 @@ import axios from 'axios'
 export  async function videosByCategory(videoCategoryId,pToken){
 
     const params ={
-      part : 'snippet',
+      part : 'snippet,contentDetails,statistics',
       chart : 'mostPopular',
       regionCode : 'IN',
       videoCategoryId : videoCategoryId,
@@ -12,7 +12,7 @@ export  async function videosByCategory(videoCategoryId,pToken){
       maxResults : 28,
       pageToken:pToken
     }
-    const categoryVideos = await axios.get(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/video`,{params})
+    const categoryVideos = await axios.get(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/videos`,{params})
     return categoryVideos?.data
    
 }
