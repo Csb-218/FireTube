@@ -18,6 +18,7 @@ const video = () => {
   const [select, setSelect] = useState(sidebar_items[0].id)
   const router = useRouter()
   const { id } = router.query
+  console.log(id)
 
   const { data: suggestedVideos } = useQuery(
     {
@@ -44,7 +45,7 @@ const video = () => {
           { 
             suggestedVideos?
             suggestedVideos?.map(video => {
-              console.log(video)
+              // console.log(video)
               const hres_thumbnail = video?.snippet?.thumbnails?.high?.url
               const default_thumbnail = video?.snippet?.thumbnails?.default?.url
               const title = video?.snippet?.title
@@ -61,7 +62,7 @@ const video = () => {
               )
             })
             :
-            sidebar_items.map(item => <Sugg_Skeleton/>)
+            sidebar_items.map(item => <Sugg_Skeleton key={item.id}/>)
             
           }
 

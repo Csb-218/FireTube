@@ -20,7 +20,7 @@ export  async function videosByCategory(videoCategoryId,pToken){
 export  async function FeedVideos(pToken){
   // console.log(pToken,25)
   const params ={
-    part : 'snippet',
+    part : 'snippet,contentDetails,statistics',
     chart : 'mostPopular',
     regionCode : 'IN',
     key : process.env.NEXT_PUBLIC_API_KEY,
@@ -42,7 +42,7 @@ export async function videoById(videoId){
   }
   try{
     const video = await axios.get(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/videos`,{params})
-    console.log(video)
+    // console.log(video)
     return video.data.items[0]
   }
   catch(err){

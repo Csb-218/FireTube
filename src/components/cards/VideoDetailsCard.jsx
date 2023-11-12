@@ -49,7 +49,7 @@ const VideoDetailsCard = ({ videoID }) => {
     };
 
     const style = {
-        // 'object-fit':'cover'
+        // 'objectFit':'cover'
         // height:`300px`
         width: '30rem'
     };
@@ -64,17 +64,19 @@ const VideoDetailsCard = ({ videoID }) => {
                     id="ytplayer"
                     type='text/html'
                     src={`http://www.youtube.com/embed/${videoID}?autoplay=1&enablejsapi=1`}
-                    className='w-full lg:h-3/4 h-[300px] rounded-xl'
+                    className='w-full lg:h-1/4 h-[300px] rounded-xl'
                 /> */}
 
                 <div className='w-full lg:h-[600px] h-[300px] rounded-xl'>
                     {
                         videoID &&
                         <ReactPlayer
-                            url={`http://www.youtube.com/embed/${videoID}?autoplay=1&enablejsapi=1&controls=1`}
+                            url={`http://www.youtube.com/watch?v=${videoID}`}
                             height={'100%'}
                             width={'100%'}
-                            style={{ 'object-fit': 'cover' }}
+                            style={{ 'objectFit': 'cover' }}
+                            controls
+                            playbackRate={1}
                         />
                     }
                 </div>

@@ -18,11 +18,11 @@ const VideoCard = ({ videoData, videoId, thumbnail, title, description, channelT
     
     return (
         <>
-            {console.log(videoData?.contentDetails?.duration)}
+            {/* {console.log(videoData?.contentDetails?.duration)} */}
             <Link href={`/video/${videoId}`}>
                 <div className="group flex flex-col h-full  shadow-sm rounded-xl  ">
                     <div className="lg:h-52 h- flex flex-col justify-center items-center relative rounded-xl overflow-clip">
-                        <img className="object-cover" src={thumbnail} />
+                        <img className="object-contain" src={thumbnail} />
                         <p className='absolute bottom-1 right-1 text-[10px] p-1 bg-black bg-opacity-80 rounded-md'>
                             {videoData?.contentDetails?.duration?.replace("H",":").replace("M",":").replace("S","").replace("PT","")}
                         </p>
