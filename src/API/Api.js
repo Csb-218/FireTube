@@ -6,7 +6,7 @@ export  async function videosByCategory(videoCategoryId,pToken){
     const params ={
       part : 'snippet,contentDetails,statistics',
       chart : 'mostPopular',
-      regionCode : 'IN',
+      regionCode : 'US',
       videoCategoryId : videoCategoryId,
       key : process.env.NEXT_PUBLIC_API_KEY,
       maxResults : 28,
@@ -22,7 +22,7 @@ export  async function FeedVideos(pToken){
   const params ={
     part : 'snippet,contentDetails,statistics',
     chart : 'mostPopular',
-    regionCode : 'IN',
+    regionCode : 'US',
     key : process.env.NEXT_PUBLIC_API_KEY,
     maxResults : 28,
     pageToken:pToken
