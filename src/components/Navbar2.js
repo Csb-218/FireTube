@@ -37,9 +37,11 @@ function Navbar2() {
         queryKey:['response'],
         queryFn:() => GoogleAuth(),
         enabled:login,
-        onSuccess:(res) => setLogin(false),
-        onError:(error)=> console.error(error)
+        onError:(err)=>console.error(err)
+        
     })
+
+    console.log(data,resError)
 
     return (
         <>

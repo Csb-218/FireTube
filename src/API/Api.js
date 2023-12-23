@@ -222,7 +222,6 @@ export async function comment(comment,videoId,user){
 
 export async function GoogleAuth(){
 
-
   const options = {
     method: 'GET',
     url: 'https://accounts.google.com/o/oauth2/v2/auth',
@@ -239,23 +238,14 @@ export async function GoogleAuth(){
     // }
   };
   
-  const params = {
-    client_id:'1034654945169-an6qsahr3r37hf32fvfvi2cmh2lb4727.apps.googleusercontent.com',
-    redirect_uri:'https://fire-tube.vercel.app',
-    response_type:'token',
-    scope:'https://www.googleapis.com/auth/youtube.force-ssl',
-    state:'pass-through value'
-  }
-
-
-
   try{
-    const response = await axios.get(`https://accounts.google.com/o/oauth2/v2/auth`,{options})
+    const response = await axios.request(options)
+    // const response = await axios.get('https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/youtube.force-ssl&state=state_parameter_passthrough_value&redirect_uri=https://fire-tube-test.vercel.app&response_type=token&client_id=1034654945169-6ts0gcm6gdjnsdmm55mgk7nggs8rq7on.apps.googleusercontent.com')
     console.log(response)
     return response
   }
   catch(err){
-    console.error(response)
+    console.error(err)
     return err
   }
 }
