@@ -65,6 +65,7 @@ export async function channelById(channelId){
 }
 
 export async function suggestedVideosById(id){
+
   const options = {
     method: 'GET',
     url: 'https://youtube-v31.p.rapidapi.com/search',
@@ -165,4 +166,97 @@ export async function searchVideos(keyword,pToken){
   
 }
 
+export async function videoComments(pToken,videoId,token){
+  // console.log(videoId)
+  const params = {
+    part:`snippet,replies`,
+    videoId:videoId,
+    pageToken:pToken,
+    key:process.env.NEXT_PUBLIC_API_KEY,
+    scopes:['https://www.googleapis.com/auth/youtube.force-ssl']
+  }
+
+  try{
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/commentThreads`,{params})
+    // console.log(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/commentThreads`)
+    // const response = await axios.get(`https://youtube.googleapis.com/youtube/v3/commentThreads`,params)
+    console.log(response)
+    return response?.data
+  }
+  catch(err){
+    // console.log(err)
+    return err
+  }
+  
+}
+ 
+export async function comment(comment,videoId,user){
+
+  const params = {
+    part:`snippet,replies`,
+    key:process.env.NEXT_PUBLIC_API_KEY
+  }
+  
+  const data = {
+    "snippet": {
+      "videoId": `${videoId}`,
+      "topLevelComment": {
+        "snippet": {
+          "textOriginal":`${comment}`,
+          "authorDisplayName": `${user}`
+        }
+      }
+    }
+  }
+  
+  try{
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/commentThreads`,{data},{params})
+    console.log(response)
+    // return response?.data
+  }
+  catch(err){
+    console.error(err)
+    //  return err
+  }
+}
+
+export async function GoogleAuth(){
+
+
+  const options = {
+    method: 'GET',
+    url: 'https://accounts.google.com/o/oauth2/v2/auth',
+    params: {
+      client_id:'1034654945169-6ts0gcm6gdjnsdmm55mgk7nggs8rq7on.apps.googleusercontent.com',
+      redirect_uri:'http://localhost:3000',
+      response_type:'token',
+      scope:'https://www.googleapis.com/auth/youtube.force-ssl',
+      state:'pass-through value'
+    },
+    headers: {
+      Host:'https://fire-tube.vercel.app/',
+      Accept:'*/*',
+    }
+  };
+  
+  const params = {
+    client_id:'1034654945169-an6qsahr3r37hf32fvfvi2cmh2lb4727.apps.googleusercontent.com',
+    redirect_uri:'https://fire-tube.vercel.app',
+    response_type:'token',
+    scope:'https://www.googleapis.com/auth/youtube.force-ssl',
+    state:'pass-through value'
+  }
+
+
+
+  try{
+    const response = await axios.get(`https://accounts.google.com/o/oauth2/v2/auth`,{options})
+    console.log(response)
+    return response
+  }
+  catch(err){
+    console.error(response)
+    return err
+  }
+}
 

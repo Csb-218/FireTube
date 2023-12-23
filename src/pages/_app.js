@@ -1,13 +1,13 @@
-'use client;'
+'use client'
 import '@/styles/globals.css'
 import { useEffect, useState ,createContext} from 'react'
 import {QueryClient,QueryClientProvider} from '@tanstack/react-query'
 import Constants from '../utils/Constants'
-import { UserProvider } from '@auth0/nextjs-auth0/client';
+import { UserProvider, } from '@auth0/nextjs-auth0/client';
 import Navbar from '@/components/Navbar'
 const FeedContext = createContext();
-import { useUser } from '@auth0/nextjs-auth0/client'
 import Navbar2 from '@/components/Navbar2'
+
 
 export default function App({ Component, pageProps }) {
 

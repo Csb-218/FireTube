@@ -2,12 +2,13 @@ import { useState, createContext } from 'react'
 import { useRouter } from 'next/router'
 import { videoById } from '@/API/Api'
 import Navbar from '@/components/Navbar'
-import { suggestedVideosById } from '@/API/Api'
+import { suggestedVideosById ,videoComments} from '@/API/Api'
 import Constants from '../../utils/Constants'
 import VideoDetailsCard from '@/components/cards/VideoDetailsCard'
 import SuggestedVideoCard from '@/components/cards/SuggestedVideoCard'
 import { useQuery, useQueries } from '@tanstack/react-query'
 import Sugg_Skeleton from '@/components/skeletons/Sugg_Skeleton'
+import CommentSection from '@/components/chat/CommentSection'
 
 
 
@@ -33,14 +34,22 @@ const video = () => {
     }
   )
 
+  
+
 
   return (
     <>
 
       <div className='p-4  h-auto flex flex-col lg:flex-row lg:gap-x-2  lg:w-auto w-full   '>
-        <div className="lg:w-3/4 w-full ">
-          <VideoDetailsCard videoID={id} />
+        <div className="flex flex-col lg:w-3/4 w-full   ">
+          <div className="">
+            <VideoDetailsCard videoID={id} />
+          </div>
+          <div className="h-auto  rounded-md">
+            <CommentSection videoId={id}/>
+          </div>
         </div>
+        
         <div className="lg:w-1/4 md:w-full sm:w-full h-full overflow-scroll p-1 ">
           { 
             suggestedVideos?
