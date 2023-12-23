@@ -228,15 +228,15 @@ export async function GoogleAuth(){
     url: 'https://accounts.google.com/o/oauth2/v2/auth',
     params: {
       client_id:'1034654945169-6ts0gcm6gdjnsdmm55mgk7nggs8rq7on.apps.googleusercontent.com',
-      redirect_uri:'http://localhost:3000',
+      redirect_uri:'https://fire-tube-test.vercel.app',
       response_type:'token',
       scope:'https://www.googleapis.com/auth/youtube.force-ssl',
       state:'pass-through value'
-    },
-    headers: {
-      Host:'https://fire-tube.vercel.app/',
-      Accept:'*/*',
     }
+    // headers: {
+    //   Host:'https://fire-tube.vercel.app/',
+    //   Accept:'*/*',
+    // }
   };
   
   const params = {

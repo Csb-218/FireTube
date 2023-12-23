@@ -15,7 +15,7 @@ function Navbar2() {
     const { select, setSelect, sidebar_items } = useContext(FeedContext)
     const router = useRouter()
     const { user, error, isLoading } = useUser();
-    const [login,setLogin] = useState()
+    const [login,setLogin] = useState(false)
     // console.log(user,accessToken)
 
     const formik = useFormik({
@@ -36,8 +36,9 @@ function Navbar2() {
     const{data,error:resError} = useQuery({
         queryKey:['response'],
         queryFn:() => GoogleAuth(),
-        enabled:!!login,
-        onSuccess:(res) => console.log(res)
+        enabled:login,
+        onSuccess:(res) => setLogin(false),
+        onError:(error)=> console.error(error)
     })
 
     return (
