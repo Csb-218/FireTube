@@ -200,11 +200,11 @@ export async function comment(comment,videoId,token){
       key:process.env.NEXT_PUBLIC_API_KEY
     },
     data: {
-      "snippet": {
-        "videoId": `${videoId}`,
-        "topLevelComment": {
-          "snippet": {
-            "textOriginal":`${comment}`,
+      snippet: {
+        videoId: `${videoId}`,
+        topLevelComment: {
+          snippet: {
+            textOriginal:`${comment}`,
           }
         }
       }

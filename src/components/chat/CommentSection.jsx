@@ -65,12 +65,12 @@ const CommentSection = ({ videoId }) => {
         initialValues: {
             comment: '',
         },
-        onSubmit: values => {
+        onSubmit: async(values) => {
             console.log(values,user,token)
 
             if(user && token){
-                comment(values?.comment,videoId,token)
-                fetchNewComment()
+                const res = await comment(values?.comment,videoId,token)
+                res?.status === 200 && fetchNewComment()
                 // router.push('/api/auth/login')
             }
             else{

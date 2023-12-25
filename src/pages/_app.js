@@ -25,12 +25,12 @@ export default function App({ Component, pageProps }) {
   const [queryClient] = useState(() => new QueryClient())
   const router = useRouter()
   const {access_token,expires_in} = router.query
-  
+
   useEffect(()=>{
     access_token && _cookies.set("access_token",access_token , { path: '/', maxAge:expires_in})
   },[access_token])
 
-  console.log(router)
+  console.log(access_token,expires_in)
 
   return (
     <>
