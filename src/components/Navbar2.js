@@ -7,7 +7,7 @@ import { useFormik } from 'formik';
 import OffCanvas from './OffCanvas'
 import { FeedContext } from '../pages/_app'
 import { useRouter } from 'next/navigation'
-import { GoogleAuth } from '@/API/Api';
+import { GoogleAuth, GoogleAuth2 ,OAuthRedirect } from '@/API/Api';
 
 
 function Navbar2() {
@@ -16,7 +16,7 @@ function Navbar2() {
     const router = useRouter()
     const { user, error, isLoading } = useUser();
     const [login,setLogin] = useState(false)
-    // console.log(user,accessToken)
+    console.log(user)
 
     const formik = useFormik({
         initialValues: {
@@ -33,15 +33,17 @@ function Navbar2() {
         },
     })
 
-    const{data,error:resError} = useQuery({
-        queryKey:['response'],
-        queryFn:() => GoogleAuth(),
+    const resDate = useQuery({
+        queryKey:['none'],
+        queryFn:()=>GoogleAuth(),
         enabled:login,
-        onError:(err)=>console.error(err)
-        
+        onSuccess:()=>setLogin(false)
+
     })
 
-    console.log(data,resError)
+   
+
+    // console.log(data,resError)
 
     return (
         <>
@@ -226,13 +228,19 @@ function Navbar2() {
                                 user ?
                                     <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="/api/auth/logout">
                                         LogOut
-                                    </a> :
-                                    <button 
-                                    className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
-                                    onClick={()=> setLogin(true)}
-                                    >
-                                        Login / SignUp
-                                    </button>
+                                    </a> 
+                                    :
+                                    <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="/api/auth/login">
+                                       Login / SignUp
+                                    </a>
+                                    // <button
+                                    // // onClick={()=>GoogleAuth2()}
+                                    // onClick={()=>user?OAuthRedirect(user?.email):alert()}
+                                    // className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
+                                    // >
+                                    //     login/signup
+
+                                    // </button>
                             }
                         </div>
                     </div>

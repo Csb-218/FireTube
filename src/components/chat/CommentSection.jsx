@@ -1,10 +1,16 @@
-import { useEffect, Fragment } from 'react'
+import { useEffect, Fragment ,useContext } from 'react'
+import AccessContext from '@/context/AccessContext'
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
-import { videoComments, comment } from '@/API/Api'
+import { videoComments, comment, OAuthRedirect } from '@/API/Api'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { useFormik } from 'formik'
+import { useRouter } from 'next/router'
 
 const CommentSection = ({ videoId }) => {
+
+    const {_cookies} = useContext(AccessContext)
+    const token = _cookies.get('access_token');
+    const router = useRouter()
 
     const handleScroll = async () => {
         try {
@@ -38,7 +44,8 @@ const CommentSection = ({ videoId }) => {
         isFetching: isCommentFetching,
         isLoading: isCommentLoading,
         isFetchingNextPage: isFetchingNextComments,
-        status: commentsStatus
+        status: commentsStatus,
+        refetch:fetchNewComment
 
     } = useInfiniteQuery(
         {
@@ -59,10 +66,23 @@ const CommentSection = ({ videoId }) => {
             comment: '',
         },
         onSubmit: values => {
-            console.log(values)
-           comment(values?.comment,videoId,'csb')
-           
-            //   alert(JSON.stringify(values, null, 2));
+            console.log(values,user,token)
+
+            if(user && token){
+                comment(values?.comment,videoId,token)
+                fetchNewComment()
+                // router.push('/api/auth/login')
+            }
+            else{
+                if(!user){
+                    console.log('login')
+                    router.push('/api/auth/login')
+                }
+                if(!token){
+                    OAuthRedirect(user?.email)
+                }
+
+            }
         },
     })
 
