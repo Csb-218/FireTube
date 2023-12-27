@@ -179,7 +179,7 @@ const CommentSection = ({ videoId }) => {
                         :
                         <>
                             {
-                                Comments?.length > 1 && Comments?.map(comment => {
+                                Comments?.length > 0 && Comments?.map(comment => {
                                     // console.log(comment)
                                     return (
                                         <Fragment key={comment?.etag}>
