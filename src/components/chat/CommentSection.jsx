@@ -1,4 +1,4 @@
-import { useEffect, Fragment ,useContext } from 'react'
+import { useState, useEffect, Fragment, useContext } from 'react'
 import AccessContext from '@/context/AccessContext'
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { videoComments, comment, OAuthRedirect } from '@/API/Api'
@@ -8,9 +8,11 @@ import { useRouter } from 'next/router'
 
 const CommentSection = ({ videoId }) => {
 
-    const {_cookies} = useContext(AccessContext)
+    const { _cookies } = useContext(AccessContext)
     const token = _cookies.get('access_token');
     const router = useRouter()
+    const [Comments, setComments] = useState([])
+    const [newComment, setNewComment] = useState()
 
     const handleScroll = async () => {
         try {
@@ -30,10 +32,9 @@ const CommentSection = ({ videoId }) => {
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll)
-
     }, [])
 
-    const { user, error, isLoading , } = useUser();
+    const { user, error, isLoading, } = useUser();
 
     const {
         data: comments,
@@ -45,40 +46,70 @@ const CommentSection = ({ videoId }) => {
         isLoading: isCommentLoading,
         isFetchingNextPage: isFetchingNextComments,
         status: commentsStatus,
-        refetch:fetchNewComment
+        refetch,
+        fetchStatus
 
     } = useInfiniteQuery(
         {
             queryKey: ['comments', videoId],
             queryFn: ({ pageParam = undefined }) => videoComments(pageParam, videoId),
-            getNextPageParam: (lastPage, pages) => lastPage?.nextPageToken ? lastPage.nextPageToken : undefined,
+            getNextPageParam: (lastPage, pages) => lastPage?.data?.nextPageToken ? lastPage?.data?.nextPageToken : undefined,
             enabled: !!videoId,
-            onSuccess: (d) => console.log(d),
             refetchIntervalInBackground: false,
-            refetchOnMount: false,
+            refetchOnMount: true,
             refetchOnReconnect: false,
             refetchOnWindowFocus: false
         }
     )
 
+    useEffect(() => {
+
+        // let commentsArray = []
+        // comments?.pages?.forEach(page => {
+        //     return(
+        //         page?.data?.items?.forEach(comment => {
+        //             return(
+        //                 commentsArray.unshift(comment)
+        //             )
+        //         })
+        //     )
+        // })
+
+        // console.log(commentsArray)
+        // setComments([...commentsArray])
+
+        // console.log(comments)
+
+    }, [comments])
+
+    useEffect(() => {
+        newComment && setComments([newComment?.data, ...Comments])
+
+    }, [newComment])
+
+
+
     const formik = useFormik({
         initialValues: {
             comment: '',
         },
-        onSubmit: async(values) => {
-            console.log(values,user,token)
+        onSubmit: async (values) => {
+            // console.log(values, user, token)
 
-            if(user && token){
-                const res = await comment(values?.comment,videoId,token)
-                res?.status === 200 && fetchNewComment()
+            if (token) {
+                const res = await comment(values?.comment, videoId, token)
+                // res?.status === 200 && refetch()
+                res?.status === 200 && setNewComment(res)
+                // setComments([...Comments,res?.data])
+                // res?.status === 200 && fetchComments()
                 // router.push('/api/auth/login')
             }
-            else{
-                if(!user){
+            else {
+                if (!user) {
                     console.log('login')
                     router.push('/api/auth/login')
                 }
-                if(!token){
+                if (!token) {
                     OAuthRedirect(user?.email)
                 }
 
@@ -146,9 +177,10 @@ const CommentSection = ({ videoId }) => {
                             <span className="sr-only">Loading...</span>
                         </div>
                         :
-                        comments?.pages?.map(page => {
-                            return (
-                                page?.items?.map(comment => {
+                        <>
+                            {
+                                Comments?.length > 1 && Comments?.map(comment => {
+                                    // console.log(comment)
                                     return (
                                         <Fragment key={comment?.etag}>
                                             {/* comment container  */}
@@ -161,17 +193,61 @@ const CommentSection = ({ videoId }) => {
                                                     <p className={
                                                         // comment?.snippet?.topLevelComment?.snippet?.textDisplay?.length > 100 &&
                                                         'overflow-hidden'}>{comment?.snippet?.topLevelComment?.snippet?.textDisplay}</p>
-
                                                 </div>
-
-
                                             </div>
                                         </Fragment>
                                     )
-                                })
-                            )
-                        })
 
+
+                                }
+                                )
+                            }
+                            {
+                                comments?.pages?.map(page => {
+                                    return (
+                                        page?.data?.items?.map(comment => {
+                                            return (
+                                                <Fragment key={comment?.etag}>
+                                                    {/* comment container  */}
+                                                    <div className=" flex space-x-5 m-6">
+                                                        {/* image */}
+                                                        <img className="rounded-full h-10 w-10 " src={`${comment?.snippet?.topLevelComment?.snippet?.authorProfileImageUrl}`} />
+                                                        {/* comment body */}
+                                                        <div className='flex flex-col space-y-2'>
+                                                            <p className='text-xs text-stone-500'>{comment?.snippet?.topLevelComment?.snippet?.authorDisplayName}</p>
+                                                            <p className={
+                                                                // comment?.snippet?.topLevelComment?.snippet?.textDisplay?.length > 100 &&
+                                                                'overflow-hidden'}>{comment?.snippet?.topLevelComment?.snippet?.textDisplay}</p>
+                                                        </div>
+                                                    </div>
+                                                </Fragment>
+                                            )
+                                        })
+                                    )
+                                })
+                            }
+
+
+                        </>
+
+                    // Comments?.map(comment => {
+                    //     return(
+                    //         <Fragment key={comment?.etag}>
+                    //                    {/* comment container  */}
+                    //                    <div className=" flex space-x-5 m-6">
+                    //                         {/* image */}
+                    //                         <img className="rounded-full h-10 w-10 " src={`${comment?.snippet?.topLevelComment?.snippet?.authorProfileImageUrl}`} />
+                    //                       {/* comment body */}
+                    //                       <div className='flex flex-col space-y-2'>
+                    //                              <p className='text-xs text-stone-500'>{comment?.snippet?.topLevelComment?.snippet?.authorDisplayName}</p>
+                    //                              <p className={
+                    //                                 // comment?.snippet?.topLevelComment?.snippet?.textDisplay?.length > 100 &&
+                    //                                 'overflow-hidden'}>{comment?.snippet?.topLevelComment?.snippet?.textDisplay}</p>
+                    //                         </div>
+                    //                     </div>
+                    //                 </Fragment>
+                    //     )
+                    // })
                 }
                 {
                     isCommentFetching ?
