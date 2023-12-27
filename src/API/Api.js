@@ -176,17 +176,13 @@ export async function videoComments(pToken,videoId,token){
     scopes:['https://www.googleapis.com/auth/youtube.force-ssl']
   }
 
-  try{
+  
     const response = await axios.get(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/commentThreads`,{params})
     // console.log(`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/commentThreads`)
     // const response = await axios.get(`https://youtube.googleapis.com/youtube/v3/commentThreads`,params)
     console.log(response)
-    return response?.data
-  }
-  catch(err){
-    // console.log(err)
-    return err
-  }
+    return response
+  
   
 }
  
@@ -197,6 +193,7 @@ export async function comment(comment,videoId,token){
     url:`${process.env.NEXT_PUBLIC_YOU_TUBE_API}/commentThreads`,
     params: {
       part:`snippet,replies`,
+      order:'time',
       key:process.env.NEXT_PUBLIC_API_KEY
     },
     data: {
