@@ -23,14 +23,31 @@ export default function App({ Component, pageProps }) {
   const {sidebar_items,feedState} = Constants()
   const [select, setSelect] = useState()
   const [queryClient] = useState(() => new QueryClient())
-  const router = useRouter()
-  const {access_token,expires_in} = router.query
+  // const router = useRouter()
+  // const {access_token,expires_in} = router.query
 
   useEffect(()=>{
-    access_token && _cookies.set("access_token",access_token , { path: '/', maxAge:expires_in})
-  },[access_token])
 
-  console.log(access_token,expires_in)
+    // Get the current URL
+    const currentUrl = window.location.href;
+
+    // Extract the fragment (everything after the '#')
+    const fragment = currentUrl.split('#')[1];
+
+    // Use the URL constructor to parse the fragment
+    const urlParams = new URLSearchParams(fragment);
+
+    // Extract the access_token and expires_in values
+    const accessToken = urlParams.get('access_token');
+    const expiresIn = urlParams.get('expires_in');
+    
+    _cookies.set("access_token",accessToken , { path: '/', maxAge:expiresIn})
+
+    // console.log(accessToken, expiresIn)
+    
+  },[])
+
+
 
   return (
     <>
