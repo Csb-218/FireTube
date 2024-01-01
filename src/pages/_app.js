@@ -6,7 +6,6 @@ import Constants from '../utils/Constants'
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import Navbar from '@/components/Navbar'
 const FeedContext = createContext();
-import { useUser } from '@auth0/nextjs-auth0/client'
 import Navbar2 from '@/components/Navbar2'
 
 export default function App({ Component, pageProps }) {
@@ -15,10 +14,11 @@ export default function App({ Component, pageProps }) {
     import('preline')
   }, [])
   
-  const [searchTerm,setTerm] = useState();
-  const {sidebar_items,feedState} = Constants()
-  const [select, setSelect] = useState()
-  const [queryClient] = useState(() => new QueryClient())
+  const [searchTerm,setTerm] = useState(null);
+  const {sidebar_items,feedState} = Constants();
+  const [select, setSelect] = useState(null);
+  const queryClient = new QueryClient();
+
   
 
   return (

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect} from 'react'
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import { FeedContext } from '../../pages/_app'
