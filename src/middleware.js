@@ -18,7 +18,7 @@ export async function middleware(request) {
   if (pathname === '/' ) {
 
     if (code) {
-      const response = await fetch(`/api/authGoogle?code=${code}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_AUTH_REDIRECT}/api/authGoogle?code=${code}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
