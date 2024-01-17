@@ -24,9 +24,10 @@ export async function middleware(request) {
           "Content-Type": "application/json",
         }
       })
+      console.log(response?.data, 999)
       const { data } = await response.json()
 
-      console.log(data, 999)
+      
 
       if (response?.status === 200) {
         const { id_token, access_token } = data;
