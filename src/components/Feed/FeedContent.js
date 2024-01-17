@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query'
 import { FeedContext } from '../../pages/_app'
 import VideoCard from '../cards/VideoCard'
-import { videosByCategory, searchVideos, FeedVideos } from "../../API/Api"
+import { videosByCategory, searchVideos, FeedVideos } from "../../services/Api"
 import CardSkeleton from '../skeletons/CardSkeleton'
 import ChannelCard from '../cards/ChannelCard'
 import channelId from '@/pages/channel/[channelId]'
