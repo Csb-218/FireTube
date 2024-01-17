@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQueries } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
-import { channelById,videosByChannel,channelPlaylists } from '@/API/Api'
+import { channelById,videosByChannel,channelPlaylists } from '@/services/Api'
 import Navbar from '@/components/Navbar'
 import Channel_tabs from '@/components/tabs/Channel_tabs'
 
