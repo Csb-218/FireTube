@@ -3,7 +3,7 @@ import { useQuery, useInfiniteQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import { FeedContext } from '../../pages/_app'
 import VideoCard from '../../components/cards/VideoCard'
-import { videosByCategory, searchVideos, FeedVideos } from "../../API/Api"
+import { videosByCategory, searchVideos, FeedVideos } from "../../services/Api"
 import CardSkeleton from '../../components/skeletons/CardSkeleton'
 import ChannelCard from '../../components/cards/ChannelCard'
 import ErrorBlock from '@/components/Errors/ErrorBlock'
