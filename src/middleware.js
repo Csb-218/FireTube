@@ -18,7 +18,7 @@ export async function middleware(request) {
   if (pathname === '/' ) {
 
     if (code) {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_AUTH_BASE}/api/authGoogle?code=${code}`, {
+      const response = await fetch(`${process.env.AUTH_BASE}/api/authGoogle?code=${code}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +59,7 @@ export async function middleware(request) {
 
      const response_type = `code`
 
-     const url = `${process.env.NEXT_PUBLIC_AUTH_BASE}?client_id=${process.env.NEXT_PUBLIC_AUTH_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_AUTH_REDIRECT}&response_type=${response_type}&scope=${process.env.NEXT_PUBLIC_SCOPE}&state=${state}&nonce=${nonce}&hd=${process.env.NEXT_PUBLLIC_HD}`
+     const url = `${process.env.AUTH_BASE}?client_id=${process.env.AUTH_CLIENT_ID}&redirect_uri=${process.env.AUTH_REDIRECT}&response_type=${response_type}&scope=${process.env.SCOPE}&state=${state}&nonce=${nonce}&hd=${process.env.HD}`
      return NextResponse.redirect(url)
   }
   // on log out page
@@ -92,7 +92,7 @@ export async function middleware(request) {
       
       const response_type = `code`
      
-      const url = `${process.env.NEXT_PUBLIC_AUTH_BASE}?client_id=${process.env.NEXT_PUBLIC_AUTH_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_AUTH_REDIRECT}&response_type=${response_type}&scope=${process.env.NEXT_PUBLIC_SCOPE}&state=${state}&nonce=${nonce}&hd=${process.env.NEXT_PUBLIC_HD}`
+      const url = `${process.env.AUTH_BASE}?client_id=${process.env.AUTH_CLIENT_ID}&redirect_uri=${process.env.AUTH_REDIRECT}&response_type=${response_type}&scope=${process.env.SCOPE}&state=${state}&nonce=${nonce}&hd=${process.env.HD}`
 
       return NextResponse.redirect(url)
     }
