@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { videoById } from '@/API/Api'
+import { videoById } from '@/services/Api'
 import Link from 'next/link'
 import stats from '@/utils/stats'
 

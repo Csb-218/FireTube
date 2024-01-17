@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation';
-import { videoById, channelById } from '@/API/Api'
+import { videoById, channelById } from '@/services/Api'
 import { useQuery, useQueries } from '@tanstack/react-query'
 import Months from '@/utils/Months';
 import YouTube from "react-youtube";

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
-import { channelById } from '@/API/Api'
+import { channelById } from '@/services/Api'
 import stats from '../../utils/stats'
 
 const SearchVideoCard = ({videoId,thumbnail, title, description, channelTitle,channelId}) => {

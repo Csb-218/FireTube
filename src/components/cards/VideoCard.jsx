@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useQuery } from '@tanstack/react-query'
-import { channelById } from '@/API/Api'
+import { channelById } from '@/services/Api'
 import Time from '../../utils/time'
 const VideoCard = ({ videoData, videoId, thumbnail, title, description, channelTitle, channelId }) => {
 
