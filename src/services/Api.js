@@ -314,9 +314,9 @@ export async function getAuthCode(code){
     url:'https://oauth2.googleapis.com/token',
     params:{
       code:code,
-      client_id:'1034654945169-6ts0gcm6gdjnsdmm55mgk7nggs8rq7on.apps.googleusercontent.com',
-      client_secret:'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',
-      redirect_uri:'http://localhost:3000',
+      client_id:`${process.env.NEXT_PUBLIC_AUTH_CLIENT_ID}`,
+      client_secret:`${process.env.NEXT_PUBLIC_CLIENT_SECRET}`,
+      redirect_uri:`${process.env.NEXT_PUBLIC_AUTH_REDIRECT}`,
       grant_type:'authorization_code',
 
     }
