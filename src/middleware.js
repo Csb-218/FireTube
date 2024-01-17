@@ -40,9 +40,11 @@ export async function middleware(request) {
         nextResponse.cookies.set("picture", picture)
         nextResponse.cookies.set("access_token", access_token)
       }
+      return nextResponse
     }
-  
-    return nextResponse
+    else{
+      return nextResponse
+    }
 
   }
   // on login page
