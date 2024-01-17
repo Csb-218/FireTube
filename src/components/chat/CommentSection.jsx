@@ -1,18 +1,17 @@
 import { useState, useEffect, Fragment, useContext } from 'react'
-import AccessContext from '@/context/AccessContext'
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
-import { videoComments, comment, OAuthRedirect } from '@/API/Api'
-import { useUser } from '@auth0/nextjs-auth0/client'
+import { useInfiniteQuery, useMutation } from '@tanstack/react-query'
+import { videoComments, comment } from '@/services/Api'
+import { useAuth } from '@/context/AuthContext'
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
 
 const CommentSection = ({ videoId }) => {
 
-    const { _cookies } = useContext(AccessContext)
-    const token = _cookies.get('access_token');
+    const { user } = useAuth();
     const router = useRouter()
     const [Comments, setComments] = useState([])
     const [newComment, setNewComment] = useState()
+    const [Loading,setLoading] = useState(false)
 
     const handleScroll = async () => {
         try {
@@ -28,13 +27,12 @@ const CommentSection = ({ videoId }) => {
         }
     }
 
-
-
     useEffect(() => {
         window.addEventListener('scroll', handleScroll)
+        return () => window?.removeEventListener('scroll', handleScroll)
     }, [])
 
-    const { user, error, isLoading, } = useUser();
+
 
     const {
         data: comments,
@@ -61,6 +59,21 @@ const CommentSection = ({ videoId }) => {
             refetchOnWindowFocus: false
         }
     )
+
+    const { isLoading: loadingComment, mutate: AddComment } = useMutation({
+        mutationFn: async (commentThread) => {
+            // console.log(commentThread,videoId,user?.access_token)
+            return comment(commentThread, videoId, user?.access_token)
+        },
+        onSuccess: (res) => {
+            setNewComment(res)
+        },
+        onError: (err) => {
+            console.error(err)
+        },
+        retry:false
+
+    })
 
     useEffect(() => {
 
@@ -94,34 +107,24 @@ const CommentSection = ({ videoId }) => {
             comment: '',
         },
         onSubmit: async (values) => {
-            // console.log(values, user, token)
-
-            if (token) {
-                const res = await comment(values?.comment, videoId, token)
-                // res?.status === 200 && refetch()
-                res?.status === 200 && setNewComment(res)
-                // setComments([...Comments,res?.data])
-                // res?.status === 200 && fetchComments()
-                // router.push('/api/auth/login')
+            
+            console.log(values, user, user?.access_token)
+            
+            if (user?.access_token) {
+                AddComment(values?.comment)
             }
             else {
-                if (!user) {
-                    console.log('login')
-                    router.push('/api/auth/login')
-                }
-                if (!token) {
-                    OAuthRedirect(user?.email)
-                }
-
+                console.log('login')
+                router.push('/login')
             }
         },
     })
 
 
-    // console.log(comments)
+    console.log(Comments)
     return (
         <>
-            {/* container */}
+            {/* container */} 
             <div className=" h-full">
                 {/* user comment container input  */}
                 <div className=" flex space-x-5 m-6">
@@ -138,7 +141,7 @@ const CommentSection = ({ videoId }) => {
                                 </svg>
                             </span>
                     }
-
+                   
                     {/* comment body */}
                     <div className='flex flex-col space-y-2 w-full'>
                         {/* <p className='text-xs text-stone-500'>{none}</p> */}
@@ -150,7 +153,7 @@ const CommentSection = ({ videoId }) => {
 
                             <textarea
                                 name='comment'
-                                className="py-1 px-0 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 text-sm focus:border-blue-500 focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-gray-700 dark:text-gray-400 dark:focus:ring-gray-600 dark:focus:border-b-gray-600"
+                                className="py-1 px-0 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 text-sm text-white focus:border-blue-500 focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-gray-700 dark:text-gray-400 dark:focus:ring-gray-600 dark:focus:border-b-gray-600"
                                 rows="1"
                                 placeholder="Comment "
                                 onChange={formik.handleChange}
@@ -168,9 +171,8 @@ const CommentSection = ({ videoId }) => {
                             </div>
                         </form>
                     </div>
-
-
                 </div>
+                
                 {
                     isCommentLoading ?
                         <div className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-blue-600 rounded-full dark:text-blue-500" role="status" aria-label="loading">
@@ -179,7 +181,7 @@ const CommentSection = ({ videoId }) => {
                         :
                         <>
                             {
-                                Comments?.length > 0 && Comments?.map(comment => {
+                                Comments?.length > 0 && Comments?.filter(comment => comment?.snippet?.videoId === videoId)?.map(comment => {
                                     // console.log(comment)
                                     return (
                                         <Fragment key={comment?.etag}>
@@ -229,25 +231,6 @@ const CommentSection = ({ videoId }) => {
 
 
                         </>
-
-                    // Comments?.map(comment => {
-                    //     return(
-                    //         <Fragment key={comment?.etag}>
-                    //                    {/* comment container  */}
-                    //                    <div className=" flex space-x-5 m-6">
-                    //                         {/* image */}
-                    //                         <img className="rounded-full h-10 w-10 " src={`${comment?.snippet?.topLevelComment?.snippet?.authorProfileImageUrl}`} />
-                    //                       {/* comment body */}
-                    //                       <div className='flex flex-col space-y-2'>
-                    //                              <p className='text-xs text-stone-500'>{comment?.snippet?.topLevelComment?.snippet?.authorDisplayName}</p>
-                    //                              <p className={
-                    //                                 // comment?.snippet?.topLevelComment?.snippet?.textDisplay?.length > 100 &&
-                    //                                 'overflow-hidden'}>{comment?.snippet?.topLevelComment?.snippet?.textDisplay}</p>
-                    //                         </div>
-                    //                     </div>
-                    //                 </Fragment>
-                    //     )
-                    // })
                 }
                 {
                     isCommentFetching ?
@@ -262,7 +245,6 @@ const CommentSection = ({ videoId }) => {
                                 <>'No more comments'</>
                                 :
                                 null
-
                 }
 
             </div>
