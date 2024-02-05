@@ -32,7 +32,7 @@ function Navbar2() {
 
     return (
         <>
-            <header className="flex lg:h-16 h-14 sticky top-0 flex-wrap sm:justify-start sm:flex-nowrap z-50 w-screen  text-sm py-4 dark:bg-black">
+            <header className="flex lg:h-16 h-14 sticky top-0 flex-wrap sm:justify-start sm:flex-nowrap z-50 w-screen  text-sm py-4 bg-black">
                 <nav className=" w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between " aria-label="Global">
                     <div className="lg:block hidden mr-4">
                         <OffCanvas />
