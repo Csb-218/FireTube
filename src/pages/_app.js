@@ -33,9 +33,6 @@ export default function App({ Component, pageProps }) {
       </QueryClientProvider>
     </UserProvider>
     </>
-    
-    
   )
-
 }
 export {FeedContext}
